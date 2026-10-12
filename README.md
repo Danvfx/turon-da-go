@@ -69,5 +69,5 @@ Notes: Google does not tell the page whether the row was saved, so "Order sent" 
 ## 6. Good to know
 
 - The page needs JavaScript for the menu lists, gallery, team, FAQ and photos. If JavaScript is blocked, visitors see a short note with the price and social handles.
-- Nothing is saved or sent anywhere by the page. No cookies or storage.
+- The page uses no cookies or browser storage. The only thing it sends anywhere is a submitted order, to your Google Form (see section 5b).
 - Click-test both social links yourself: `@turondagowch` (Instagram) and `@turondagoat` (TikTok) were used exactly as given.
