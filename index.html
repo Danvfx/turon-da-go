@@ -426,7 +426,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
 
     <div class="hero-art" id="heroArt" data-fallback>
       <div class="disc"></div>
-      <img class="hero-photo" data-img="boxScoop" alt="A kraft box of Saba-Zero: mini-turon bites on banana leaf, topped with a scoop of vanilla ice cream and chocolate drizzle.">
+      <img class="hero-photo" data-img="boxScoop" alt="A kraft box of Saba-Zero: mini-turon bites on banana leaf, topped with a scoop of ice cream and chocolate drizzle.">
       <!-- hero fallback SVG is cloned from the builder preview by JS when the photo is missing -->
       <svg class="fx fx-steam steam" viewBox="0 0 100 80" aria-hidden="true"><path d="M20 76 C 8 62, 32 52, 20 36 S 28 14, 22 4"/><path d="M50 78 C 38 64, 62 54, 50 38 S 58 16, 52 6"/><path d="M80 76 C 68 62, 92 52, 80 36 S 88 14, 82 4"/></svg>
       <svg class="fx fx-frost" viewBox="0 0 100 100" aria-hidden="true">
@@ -545,7 +545,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
     <!-- BUILDER -->
     <div class="builder reveal" id="builder" role="group" aria-labelledby="builder-h">
       <div class="b-stage">
-        <svg id="boxSvg" viewBox="0 0 360 300" role="img" aria-label="Preview of your Saba-Zero box. It updates when you change the choices." data-ice="vanilla">
+        <svg id="boxSvg" viewBox="0 0 360 300" role="img" aria-label="Preview of your Saba-Zero box. It updates when you change the choices." data-ice="strawberry">
           <defs>
             <g id="roll">
               <rect width="118" height="34" rx="17" style="fill:var(--b-turon)" stroke="#4B2E24" stroke-opacity=".4" stroke-width="1.5"/>
@@ -870,7 +870,7 @@ const SOCIAL = {
   // TODO: Facebook Messenger link goes here when provided. Not added on purpose.
 };
 
-// Flavors. Add a new one by adding a line to the right list (ice cream list may grow, the study says "etc.").
+// Flavors. Add a new one by adding a line to the right list (ice cream list may grow, the list may grow).
 // body = turon wrapper color, fill = turon filling color, color = dot/scoop/sauce color, accent = marks a dark swatch
 const FLAVORS = {
   turon: [
@@ -880,8 +880,6 @@ const FLAVORS = {
     { id: "cheese",    name: "Cheese",    body: "#D9A441", fill: "#FFE08A", color: "#FFE08A" }
   ],
   ice: [
-    { id: "vanilla",    name: "Vanilla",         color: "#FBE9B7" },
-    { id: "chocolate",  name: "Chocolate",       color: "#6A3B2B" },
     { id: "strawberry", name: "Strawberry",      color: "#F29BB0" },
     { id: "cookies",    name: "Cookies & Cream", color: "#E7E1D8" },
     { id: "ube",        name: "Ube",             color: "#A37BC7" }
@@ -907,7 +905,7 @@ const TEAM = [
 // Gallery tiles. src comes from IMAGES above. If a src is empty, a placeholder tile is shown.
 // TODO: replace placeholders with real photos: product shots, the booth at Br. Donato Hall, the team, ingredients.
 const GALLERY = [
-  { src: IMAGES.boxScoop,     alt: "Saba-Zero box with mini-turon bites, a scoop of vanilla ice cream and chocolate drizzle, on banana leaf.", label: "Saba-Zero with a scoop" },
+  { src: IMAGES.boxScoop,     alt: "Saba-Zero box with mini-turon bites, a scoop of ice cream and chocolate drizzle, on banana leaf.", label: "Saba-Zero with a scoop" },
   { src: IMAGES.box,          alt: "A box of mini-turon bites with chocolate drizzle on banana leaf.",                                         label: "Mini-turon box" },
   { src: IMAGES.booth,        alt: "Our booth at Br. Donato Hall.",                                label: "Our booth",        ph: "Booth at Br. Donato Hall" },
   { src: IMAGES.turonCloseup, alt: "Close-up of warm, crispy mini-turon.",                          label: "Warm and crispy",  ph: "Close-up of the turon" },
@@ -920,7 +918,7 @@ const GALLERY = [
 // FAQ. {price} and {pieces} are filled in from the constants above.
 const FAQ = [
   { q: "What is Saba-Zero?",            a: "Warm, crispy mini-turon bites served with ice cream and sauce drizzles, a hot-and-cold twist on a classic Filipino merienda." },
-  { q: "What flavors can I choose?",    a: "Turon: Plain, Chocolate, Ube, Cheese. Ice cream: Vanilla, Chocolate, Strawberry, Cookies & Cream, Ube. Sauce: Chocolate, Vanilla, Caramel." },
+  { q: "What flavors can I choose?",    a: "Turon: Plain, Chocolate, Ube, Cheese. Ice cream: Strawberry, Cookies & Cream, Ube. Sauce: Chocolate, Vanilla, Caramel." },
   { q: "How much is it?",               a: "₱{price} per order of {pieces} pieces." },   // tentative, see PRICE note above
   { q: "Where can I buy it?",           a: "At our booth on campus at Br. Donato Hall, La Salle College Antipolo." },
   { q: "Can I pre-order?",              a: "Yes. Send us your order on Instagram or TikTok ahead of time so we can have it ready during break." },
