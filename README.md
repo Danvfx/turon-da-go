@@ -54,6 +54,18 @@ Only use photos you took or have permission to use.
 - **Default (no setup):** visitors fill the form, the site writes a ready-made message with the estimated total, they copy it and send it to your Instagram or TikTok.
 - **Google Form upgrade:** make a Google Form, click Send > link, and paste the link into `const ORDER_FORM_URL = "";`. Every Order button then opens your form in a new tab, and answers land in a Google Sheet.
 
+## 5b. Live orders into a Google Sheet (recommended for demos)
+
+When this is on, tapping **Create my message** also sends the order to a Google Form in the background. Each order becomes a new row in a Google Sheet, and the visitor sees "Order sent". The copy-and-send message stays as a backup.
+
+1. Make a Google Form. Add these questions **in this order**, all as **Short answer** (use Paragraph for the last two): Order type, Name, Grade and section, Turon flavor, Ice cream flavor, Sauce, Number of orders, Payment method, Preferred break time, Notes, Estimated total.
+2. In the form's **Responses** tab, click **Link to Sheets**.
+3. Send the form's share link to whoever maintains the site. They fill in `ORDER_SUBMIT` (search for it in `index.html`) with the form address and each question's id.
+4. Leave `ORDER_FORM_URL` empty so visitors use this site's form instead of the Google Form page.
+5. Send one test order, then check the Sheet.
+
+Notes: Google does not tell the page whether the row was saved, so "Order sent" means the browser delivered it. Always check the Sheet during a demo. To turn live orders off, set `formResponseUrl` back to `""`.
+
 ## 6. Good to know
 
 - The page needs JavaScript for the menu lists, gallery, team, FAQ and photos. If JavaScript is blocked, visitors see a short note with the price and social handles.

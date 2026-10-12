@@ -247,6 +247,11 @@ h2{font-weight:800;font-size:clamp(1.95rem,4.6vw,3.1rem)}
 .gcash-line{margin:1.1rem 0 0;font-weight:700}
 .gcash-line b{font-family:var(--f-play);font-size:1.25rem;letter-spacing:.04em;background:var(--cream);color:var(--choc);padding:.15em .6em;border-radius:12px;border:2px solid var(--choc);display:inline-block;user-select:all}
 .gcash-note{margin:10px 0 0;font-weight:700}
+.send-status{margin:0 0 .8rem;padding:.7em 1em;border-radius:14px;border:2px solid var(--choc);font-weight:700;background:var(--white)}
+.send-status[hidden]{display:none}
+.send-status.ok{background:var(--banana)}
+.send-status.bad{background:#FFF8F6;border-color:#A3261A;color:#7A1C12}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
 .gcash-note[hidden]{display:none}
 .price-card{background:var(--cream);color:var(--choc);border:3px solid var(--choc);border-radius:32px;padding:clamp(26px,4vw,44px);text-align:center;transform:rotate(-2deg);box-shadow:0 10px 0 var(--choc);position:relative}
 .price-card .big{font-family:var(--f-head);font-weight:900;font-size:clamp(4.2rem,11vw,6.6rem);line-height:.95;letter-spacing:-.04em}
@@ -721,14 +726,16 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
           </div>
         </div>
 
+        <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="fWebsite" name="website" tabindex="-1" autocomplete="off"></label></div>
         <div class="total" id="totalBox"><span>Estimated total</span><b id="totalVal">&#8369;100</b></div>
         <p class="form-msg" id="formMsg" role="alert"></p>
         <button class="btn btn-primary" type="button" id="submitBtn" style="margin-top:14px;width:100%">Create my message</button>
       </form>
 
       <div class="result" id="result" hidden>
-        <h3>Your message is ready</h3>
-        <p>Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus.</p>
+        <h3 id="resultTitle">Your message is ready</h3>
+        <p class="send-status" id="sendStatus" role="status" hidden></p>
+        <p id="resultHelp">Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus.</p>
         <label class="sr-only" for="msgOut">Your message</label>
         <textarea class="input" id="msgOut" readonly></textarea>
         <div class="result-btns">
@@ -863,6 +870,28 @@ const GCASH_NUMBER = "09171699187";
 // Optional upgrade: paste a Google Form link here and every "Order" button opens it in a new tab.
 // Leave "" to use the built-in message builder (works with zero setup).
 const ORDER_FORM_URL = "";
+
+// LIVE ORDERS: when this is filled in, "Create my message" ALSO posts the order in the background to a Google Form,
+// and every order lands as a new row in the form's Google Sheet. The Instagram/TikTok message stays as a backup.
+// Leave formResponseUrl "" to turn it off. Keep ORDER_FORM_URL empty so visitors use THIS site's form.
+//   formResponseUrl: the form's address ending in /formResponse
+//   fields: each question's id from the form, like "entry.1234567890". Leave a field "" to skip it.
+const ORDER_SUBMIT = {
+  formResponseUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc6tJQjSLFXXbbptNw26Bo_8SbDthQwDjnElqTVUmxH8aTYag/formResponse",
+  fields: {
+    type: "entry.2063833007",       // "Order" or "Inquiry"
+    name: "entry.548182127",
+    group: "entry.746743575",       // grade and section
+    turon: "entry.651706916",
+    ice: "entry.1674768749",
+    sauce: "entry.327890033",
+    orders: "entry.758694737",      // number of orders
+    payment: "entry.1350477244",    // Cash or GCash
+    breakTime: "entry.81030323",
+    notes: "entry.1740605991",      // notes, or the question in inquiry mode
+    total: "entry.45498111"         // estimated total, e.g. ₱300
+  }
+};
 
 const SOCIAL = {
   instagram: { handle: "@turondagowch", url: "https://www.instagram.com/turondagowch/" },
@@ -1193,14 +1222,53 @@ const FAQ = [
   }
   // Sandboxed embeds usually lack "allow-forms", which silently blocks native form submission.
   // So the button is type="button" and we handle click + Enter ourselves. Nothing is ever posted anywhere.
+  var sending = false, lastSent = "";
+  function orderData() {
+    var d = { type: mode === "order" ? "Order" : "Inquiry", name: $("#fName").value.trim(), group: $("#fGroup").value.trim(), notes: $("#fNotes").value.trim() };
+    if (mode === "order") {
+      var n = qtyValue();
+      d.turon = find("turon", sel.turon).name; d.ice = find("ice", sel.ice).name; d.sauce = find("sauce", sel.sauce).name;
+      d.orders = String(n); d.payment = $('input[name="pay"]:checked').value; d.breakTime = $("#fBreak").value.trim(); d.total = peso(n * PRICE);
+    }
+    return d;
+  }
+  // Posts to the Google Form with no-cors fetch. (A normal form post is blocked in sandboxed embeds, and the reply is opaque,
+  // so "sent" means the browser delivered it; check your Sheet to confirm rows arrive.)
+  function sendToForm(d) {
+    var body = new URLSearchParams();
+    Object.keys(ORDER_SUBMIT.fields).forEach(function (k) { var id = ORDER_SUBMIT.fields[k]; if (id && d[k] !== undefined) body.append(id, d[k]); });
+    var timeout = new Promise(function (_, rej) { setTimeout(function () { rej(new Error("timeout")); }, 20000); });
+    return Promise.race([fetch(ORDER_SUBMIT.formResponseUrl, { method: "POST", mode: "no-cors", body: body }), timeout]);
+  }
+  function setSendState(state) {
+    var st = $("#sendStatus"), title = $("#resultTitle"), help = $("#resultHelp"), btn = $("#submitBtn");
+    st.className = "send-status"; st.hidden = false;
+    btn.disabled = (state === "sending");
+    if (state === "sending") { st.textContent = "Sending your order to Turon-Da-Go..."; title.textContent = "Sending your order"; }
+    else if (state === "sent") { st.classList.add("ok"); st.textContent = "Order sent! We got your details and will confirm with you on Instagram or TikTok."; title.textContent = "Order sent"; help.textContent = "Backup: you can also send this message to us on Instagram or TikTok."; }
+    else if (state === "dup") { st.classList.add("ok"); st.textContent = "This order was already sent. Change something to send a new one."; title.textContent = "Order sent"; }
+    else { st.classList.add("bad"); st.textContent = "We could not confirm that your order was sent. Please copy the message below and send it to us on Instagram or TikTok so we do not miss it."; title.textContent = "Your message is ready"; help.textContent = "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus."; }
+  }
   function submitForm() {
+    if (sending) return;
     if (!validate()) { $("#result").hidden = true; return; }
-    $("#msgOut").value = buildMessage();
+    var msg = buildMessage();
+    $("#msgOut").value = msg;
     var res = $("#result"); res.hidden = false;
     $("#gcashNote").hidden = !(mode === "order" && $('input[name="pay"]:checked').value === "GCash");
     $("#copyStatus").textContent = "If the copy button does nothing, select the text in the box and copy it.";
+    $("#resultTitle").textContent = "Your message is ready";
+    $("#resultHelp").textContent = "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus.";
+    $("#sendStatus").hidden = true;
     goTo("result", false);
     $("#msgOut").focus();
+    if (!ORDER_SUBMIT.formResponseUrl) return;               // live orders switched off: message only
+    if ($("#fWebsite").value) return;                         // spam trap filled in: do not send
+    if (msg === lastSent) { setSendState("dup"); return; }   // no duplicate rows
+    sending = true; setSendState("sending");
+    sendToForm(orderData()).then(function () { lastSent = msg; setSendState("sent"); },
+                                 function () { setSendState("fail"); })
+                           .then(function () { sending = false; $("#submitBtn").disabled = false; });
   }
   form.addEventListener("submit", function (e) { e.preventDefault(); submitForm(); });
   $("#submitBtn").addEventListener("click", submitForm);
