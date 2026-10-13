@@ -191,6 +191,18 @@ h2{font-weight:800;font-size:clamp(1.95rem,4.6vw,3.1rem)}
 @media (max-width:520px){.values{grid-template-columns:1fr}}
 .values-title{margin-bottom:clamp(20px,3vw,32px)}
 
+/* ---------- SDG 8 ---------- */
+.sdg-head{display:flex;gap:clamp(16px,3vw,32px);align-items:center;margin-bottom:clamp(24px,4vw,44px)}
+.sdg-badge{flex:none;width:clamp(84px,12vw,118px);aspect-ratio:1;border-radius:26px;background:var(--banana);color:var(--choc);border:3px solid var(--cream);display:grid;place-items:center;text-align:center;font-family:var(--f-play);font-weight:700;line-height:1;transform:rotate(-4deg)}
+.sdg-badge small{display:block;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.sdg-badge b{display:block;font-family:var(--f-head);font-weight:900;font-size:clamp(2.6rem,6vw,3.8rem);letter-spacing:-.03em}
+.sdg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+.sdg-card{border:2px solid rgba(255,244,220,.28);border-radius:var(--radius);padding:clamp(20px,3vw,30px)}
+.sdg-card h3{color:var(--banana);font-size:1.35rem;font-weight:700;margin-bottom:.5rem}
+.sdg-card p{margin:0;color:rgba(255,244,220,.92)}
+@media (max-width:860px){.sdg-grid{grid-template-columns:1fr}}
+@media (max-width:520px){.sdg-head{flex-direction:column;align-items:flex-start}}
+
 /* ---------- Menu ---------- */
 .menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,26px)}
 .menu-card .m-ico{width:72px;height:60px}
@@ -510,6 +522,35 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
   </div>
 </section>
 
+<!-- =========================== SDG 8 =========================== -->
+<section class="section dark" id="sdg8" aria-labelledby="sdg8-h">
+  <div class="wrap">
+    <div class="sdg-head reveal">
+      <div class="sdg-badge" aria-hidden="true"><div><small>SDG</small><b>8</b></div></div>
+      <div>
+        <span class="eyebrow">Our purpose</span>
+        <h2 id="sdg8-h">Decent Work and Economic Growth</h2>
+        <p class="lede" style="margin-top:.7rem;margin-bottom:0">Turon-Da-Go supports the UN Sustainable Development Goal 8. It is a student-run business where young people learn to do real, honest work.</p>
+      </div>
+    </div>
+    <!-- TODO: confirm the SDG 8 wording with the teacher. This uses a plain badge, not the official UN SDG icon. -->
+    <div class="sdg-grid">
+      <article class="sdg-card reveal">
+        <h3>Real work for students</h3>
+        <p>Six student partners run the whole business together, from production and finance to sales and customer relations.</p>
+      </article>
+      <article class="sdg-card reveal" style="--i:1">
+        <h3>Local ingredients, new ideas</h3>
+        <p>We are committed to using quality local ingredients and giving a classic Filipino merienda a creative twist.</p>
+      </article>
+      <article class="sdg-card reveal" style="--i:2">
+        <h3>Growth done responsibly</h3>
+        <p>Honesty and efficiency guide how we serve customers, use resources and handle waste, so the business can grow the right way.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- =========================== C. MENU =========================== -->
 <section class="section white" id="menu" aria-labelledby="menu-h">
   <div class="wrap">
@@ -819,7 +860,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
         <a href="#order" data-order-link>Order</a>
       </div>
     </div>
-    <p class="foot-note">A student enterprise project of Grade 12 ABM, La Salle College Antipolo.</p>
+    <p class="foot-note">A student enterprise project of Grade 12 ABM, La Salle College Antipolo. Supporting UN Sustainable Development Goal 8: Decent Work and Economic Growth.</p>
   </div>
 </footer>
 
