@@ -242,7 +242,8 @@ h2{font-weight:800;font-size:clamp(1.95rem,4.6vw,3.1rem)}
 .b-steam path{fill:none;stroke:var(--caramel);stroke-width:4;stroke-linecap:round;opacity:0;animation:steam 3.6s ease-in-out infinite}
 .b-steam path:nth-child(2){animation-delay:1.4s}
 #boxSvg .cc{display:none}
-#boxSvg[data-ice="cookies"] .cc{display:inline}
+#boxSvg .b-tops g{display:none}
+#boxSvg[data-top~="marshmallows"] .t-marsh,#boxSvg[data-top~="chocochips"] .t-chip,#boxSvg[data-top~="hany"] .t-hany{display:inline}
 
 /* ---------- Pricing ---------- */
 .caramel-bg{background:var(--caramel);color:var(--white)}
@@ -331,6 +332,10 @@ textarea.input{min-height:96px;resize:vertical}
 @media (max-width:900px){.order-grid{grid-template-columns:1fr}}
 @media (max-width:560px){.fields{grid-template-columns:1fr}}
 .form-link{margin-top:1.2rem}
+.w-title{font-family:var(--f-head);font-weight:800;font-size:1.6rem;margin-bottom:1.1rem}
+.hint-line{margin-top:1.2rem;font-weight:600}
+.hint-line a{text-decoration:underline}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
 
 /* ---------- Team ---------- */
 .team{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.2vw,26px)}
@@ -395,7 +400,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
 </head>
 
 <body>
-<noscript><div class="noscript-bar">Some parts of this page (menu lists, gallery, team, FAQ) need JavaScript. Quick facts: Saba-Zero is 4 mini-turon bites, 1 ice cream scoop and 1 sauce drizzle for &#8369;100. Order on Instagram @turondagowch or TikTok @turondagoat. Pay with Cash or GCash (0917 169 9187).</div></noscript>
+<noscript><div class="noscript-bar">Some parts of this page (menu lists, gallery, team, FAQ) need JavaScript. Quick facts: Saba-Zero is 4 mini-turon bites, 1 ice cream scoop, 1 sauce drizzle and optional toppings for &#8369;100. Order on Instagram @turondagowch or TikTok @turondagoat. Pay with Cash or GCash (0917 169 9187).</div></noscript>
 
 <!-- =========================== NAV =========================== -->
 <header class="nav" id="nav">
@@ -417,6 +422,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
       <a href="#gallery">Gallery</a>
       <a href="#team">Team</a>
       <a href="#faq">FAQ</a>
+      <a href="#inquiry">Inquiry</a>
       <a href="#contact">Contact</a>
       <a class="btn btn-small btn-primary nav-order" href="#order" data-order-link>Order</a>
     </nav>
@@ -429,7 +435,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <h1 id="h1">Your bite-size craving with a <span class="twist">twist!<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 30 2, 50 20, 80 10 S 130 2, 160 12 S 190 14, 197 6" fill="none" stroke="#A65E2E" stroke-width="7" stroke-linecap="round"/></svg></span></h1>
-      <p class="lede">Warm, crispy mini-turon bites, a cold scoop of ice cream, and a sauce drizzle. One box, made fresh on campus.</p>
+      <p class="lede">Warm, crispy mini-turon bites, a cold scoop of ice cream, a sauce drizzle, and your choice of toppings. One box, made fresh on campus.</p>
       <div class="hotcold" aria-hidden="true">
         <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="#A65E2E" stroke-width="2.4" stroke-linecap="round"><path d="M8 20c-2-3 2-5 0-8M13 20c-2-3 2-5 0-8M18 20c-2-3 2-5 0-8" transform="translate(-2 0)"/></svg>Warm turon</span>
         <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="#4B2E24" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/></svg>Cold ice cream</span>
@@ -557,7 +563,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
     <div class="sec-head reveal">
       <span class="eyebrow">The menu</span>
       <h2 id="menu-h">Warm turon. Cold ice cream. One box.</h2>
-      <p class="lede">Pick a turon, a scoop, and a drizzle. Crispy, creamy, and made fresh on campus.</p>
+      <p class="lede">Pick a turon, a drizzle, and your toppings. Crispy, creamy, and made fresh on campus.</p>
     </div>
 
     <div class="menu-grid">
@@ -567,14 +573,14 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
         <ul class="flavors" id="listTuron"></ul>
       </article>
       <article class="card menu-card reveal" style="--i:1">
-        <svg class="m-ico" preserveAspectRatio="xMinYMid meet" viewBox="0 0 48 48" aria-hidden="true"><path d="M15 25h18l-9 20z" fill="#D9953F" stroke="#4B2E24" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="18" r="11" fill="#FBE9B7" stroke="#4B2E24" stroke-width="2"/><path d="M17 15c2-3 5-4 8-3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
-        <h3>Ice cream</h3><div class="count" id="iceCount"></div>
-        <ul class="flavors" id="listIce"></ul>
-      </article>
-      <article class="card menu-card reveal" style="--i:2">
         <svg class="m-ico" preserveAspectRatio="xMinYMid meet" viewBox="0 0 48 48" aria-hidden="true"><path d="M19 5h10v7l5 5v24a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3V17l5-5z" fill="#4B2E24" stroke="#4B2E24" stroke-width="2" stroke-linejoin="round"/><rect x="17" y="23" width="14" height="13" rx="2" fill="#F4C542"/><path d="M20 28l2.5 4 2-4 2.5 4" stroke="#4B2E24" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <h3>Sauce drizzle</h3><div class="count" id="sauceCount"></div>
         <ul class="flavors" id="listSauce"></ul>
+      </article>
+      <article class="card menu-card reveal" style="--i:2">
+        <svg class="m-ico" preserveAspectRatio="xMinYMid meet" viewBox="0 0 48 48" aria-hidden="true"><circle cx="14" cy="16" r="6" fill="#FFFDF3" stroke="#4B2E24" stroke-width="2"/><circle cx="33" cy="14" r="6" fill="#FFFDF3" stroke="#4B2E24" stroke-width="2"/><path d="M10 34l8-3 3 8-8 3zM28 32l9 2-2 9-9-2z" fill="#3A1F15" stroke="#4B2E24" stroke-width="2" stroke-linejoin="round"/></svg>
+        <h3>Toppings</h3><div class="count" id="toppingCount"></div>
+        <ul class="flavors" id="listTopping"></ul>
       </article>
     </div>
 
@@ -591,7 +597,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
     <!-- BUILDER -->
     <div class="builder reveal" id="builder" role="group" aria-labelledby="builder-h">
       <div class="b-stage">
-        <svg id="boxSvg" viewBox="0 0 360 300" role="img" aria-label="Preview of your Saba-Zero box. It updates when you change the choices." data-ice="vanilla">
+        <svg id="boxSvg" viewBox="0 0 360 300" role="img" aria-label="Preview of your Saba-Zero box. It updates when you change the choices." data-top="">
           <defs>
             <g id="roll">
               <rect width="118" height="34" rx="17" style="fill:var(--b-turon)" stroke="#4B2E24" stroke-opacity=".4" stroke-width="1.5"/>
@@ -627,6 +633,11 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
             <path d="M-27 -12 Q-19 4 -11 -10 T5 -10 T21 -10 T29 -12" fill="none" stroke="#4B2E24" stroke-opacity=".25" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M-27 -12 Q-19 4 -11 -10 T5 -10 T21 -10 T29 -12" fill="none" style="stroke:var(--b-sauce)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
           </g>
+          <g transform="translate(180 104)" class="b-tops" aria-hidden="true">
+            <g class="t-marsh"><rect x="-22" y="-44" width="11" height="9" rx="3" fill="#fff" stroke="#4B2E24" stroke-width="1.5" transform="rotate(-18 -16 -40)"/><rect x="8" y="-40" width="11" height="9" rx="3" fill="#fff" stroke="#4B2E24" stroke-width="1.5" transform="rotate(14 13 -36)"/><rect x="26" y="-14" width="11" height="9" rx="3" fill="#fff" stroke="#4B2E24" stroke-width="1.5" transform="rotate(24 31 -10)"/></g>
+            <g class="t-chip"><path d="M-6 -36l5 2-3 5z" fill="#3A1F15"/><path d="M-30 -22l5 1-2 5z" fill="#3A1F15"/><path d="M20 -22l5 2-4 4z" fill="#3A1F15"/><path d="M-12 -18l5 1-2 5z" fill="#3A1F15"/></g>
+            <g class="t-hany" fill="#C58B4E" stroke="#4B2E24" stroke-width="1"><rect x="-32" y="-2" width="6" height="4" rx="1"/><rect x="-2" y="-24" width="5" height="4" rx="1"/><rect x="14" y="-8" width="6" height="4" rx="1"/><rect x="-10" y="-6" width="5" height="4" rx="1"/><rect x="34" y="-26" width="5" height="4" rx="1"/></g>
+          </g>
           <path class="spark" d="M244 46 L248 58 L260 62 L248 66 L244 78 L240 66 L228 62 L240 58Z"/>
           <path class="spark s2" d="M122 40 L125 48 L133 51 L125 54 L122 62 L119 54 L111 51 L119 48Z"/>
         </svg>
@@ -634,11 +645,11 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
       <div class="b-controls">
         <span class="eyebrow">Build your own</span>
         <h3 id="builder-h">Build Your Saba-Zero</h3>
-        <p class="sub">Build it your way: pick a turon, a scoop, and a drizzle. One turon flavor per box.</p>
+        <p class="sub">Build it your way: pick a turon, a drizzle, and any toppings. Every box comes with a scoop of ice cream. One turon flavor per box.</p>
         <!-- ASSUMPTION: all 4 pieces in a box share one turon flavor. Not stated by the client, confirm. -->
         <fieldset class="group"><legend>1. Turon flavor</legend><div class="chips" id="chipsTuron"></div></fieldset>
-        <fieldset class="group"><legend>2. Ice cream scoop</legend><div class="chips" id="chipsIce"></div></fieldset>
-        <fieldset class="group"><legend>3. Sauce drizzle</legend><div class="chips" id="chipsSauce"></div></fieldset>
+        <fieldset class="group"><legend>2. Sauce drizzle</legend><div class="chips" id="chipsSauce"></div></fieldset>
+        <fieldset class="group"><legend>3. Toppings (pick any, or none)</legend><div class="chips" id="chipsTopping"></div></fieldset>
         <p class="b-summary" id="bSummary" aria-live="polite"></p>
         <a class="btn btn-primary" href="#order" id="bOrder">Order this Saba-Zero</a>
       </div>
@@ -657,7 +668,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
       <ul class="inc" aria-label="What is in one order">
         <li><span class="n" data-pieces>4</span> mini-turon bites, warm and crispy</li>
         <li><span class="n">1</span> scoop of ice cream</li>
-        <li><span class="n">1</span> sauce drizzle</li>
+        <li><span class="n">1</span> sauce drizzle: Chocolate or Biscoff</li>
         <li><span class="n">+</span> custom box and disposable utensil</li>
       </ul>
       <div class="pay"><b>Pay with</b>
@@ -691,11 +702,11 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
   </div>
 </section>
 
-<!-- =========================== F. ORDER / INQUIRY =========================== -->
+<!-- =========================== F. ORDER =========================== -->
 <section class="section white" id="order" aria-labelledby="order-h">
   <div class="wrap order-grid">
     <div class="reveal">
-      <span class="eyebrow">Order or ask</span>
+      <span class="eyebrow">Order</span>
       <h2 id="order-h">Break time just got an upgrade.</h2>
       <p class="lede" style="margin-top:.9rem">Pre-order so your Saba-Zero is ready when the bell rings. No account, no waiting in line.</p>
       <ol class="how" style="list-style:none">
@@ -703,18 +714,15 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
         <li><span class="n" aria-hidden="true">2</span><span>Copy the message and send it to us on Instagram or TikTok.</span></li>
         <li><span class="n" aria-hidden="true">3</span><span>We confirm your order, and you pay with Cash or GCash on campus.</span></li>
       </ol>
+      <p class="hint-line">Just have a question? Use the <a href="#inquiry">inquiry form</a> instead.</p>
       <div class="form-link" id="externalFormBox" hidden>
         <a class="btn btn-yellow" href="#" id="externalFormBtn" target="_blank" rel="noopener noreferrer">Open the order form</a>
       </div>
     </div>
 
     <div class="form-card reveal" style="--i:1">
+      <h3 class="w-title">Place an Order</h3>
       <form id="orderForm" novalidate>
-        <div class="mode" role="radiogroup" aria-label="What would you like to do?">
-          <label><input type="radio" name="mode" value="order" checked><span>Place an Order</span></label>
-          <label><input type="radio" name="mode" value="inquiry"><span>Send an Inquiry</span></label>
-        </div>
-
         <div class="fields">
           <div class="field">
             <label for="fName">Your name</label>
@@ -729,25 +737,25 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
             <div class="err" id="eGroup" role="alert"></div>
           </div>
 
-          <div class="field" data-order-only>
+          <div class="field">
             <label for="fTuron">Turon flavor</label>
             <select class="input" id="fTuron" name="turon"></select>
           </div>
-          <div class="field" data-order-only>
-            <label for="fIce">Ice cream flavor</label>
-            <select class="input" id="fIce" name="ice"></select>
-          </div>
-          <div class="field" data-order-only>
+          <div class="field">
             <label for="fSauce">Sauce drizzle</label>
             <select class="input" id="fSauce" name="sauce"></select>
           </div>
-          <div class="field" data-order-only>
+          <div class="field full">
+            <span class="lab" id="topLab">Toppings (optional)</span>
+            <div class="chips" id="fToppings" role="group" aria-labelledby="topLab"></div>
+          </div>
+          <div class="field">
             <label for="fQty">Number of orders</label>
             <input class="input" id="fQty" name="qty" type="number" min="1" max="20" step="1" value="1" inputmode="numeric">
             <div class="hint"><span data-pieces>4</span> pieces per order</div>
             <div class="err" id="eQty" role="alert"></div>
           </div>
-          <div class="field" data-order-only>
+          <div class="field">
             <span class="lab" id="payLab">Payment method</span>
             <div class="mode" role="radiogroup" aria-labelledby="payLab" style="margin:0">
               <label><input type="radio" name="pay" value="Cash"><span>Cash</span></label>
@@ -755,13 +763,13 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
             </div>
             <div class="err" id="ePay" role="alert"></div>
           </div>
-          <div class="field" data-order-only>
+          <div class="field full">
             <label for="fBreak">Preferred break time</label>
             <input class="input" id="fBreak" name="breakTime" type="text" maxlength="60" placeholder="e.g. Morning break">
           </div>
 
           <div class="field full">
-            <label for="fNotes" id="notesLab">Notes (optional)</label>
+            <label for="fNotes">Notes (optional)</label>
             <textarea class="input" id="fNotes" name="notes" maxlength="500"></textarea>
             <div class="err" id="eNotes" role="alert"></div>
           </div>
@@ -786,6 +794,58 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
         </div>
         <p class="gcash-note" id="gcashNote" hidden>Paying with GCash? Our GCash number is <b data-gcash>0917 169 9187</b>.</p>
         <p class="copy-status" id="copyStatus" role="status">If the copy button does nothing, select the text in the box and copy it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================== F2. INQUIRY =========================== -->
+<section class="section" id="inquiry" aria-labelledby="inquiry-h">
+  <div class="wrap order-grid">
+    <div class="reveal">
+      <span class="eyebrow">Inquiry</span>
+      <h2 id="inquiry-h">Got a question? Ask away.</h2>
+      <p class="lede" style="margin-top:.9rem">Wondering about flavors, allergens, pricing or pickup? Send us your question and we will reply on Instagram or TikTok.</p>
+    </div>
+
+    <div class="form-card reveal" style="--i:1">
+      <h3 class="w-title">Send an Inquiry</h3>
+      <form id="inquiryForm" novalidate>
+        <div class="fields">
+          <div class="field">
+            <label for="iName">Your name</label>
+            <input class="input" id="iName" name="name" type="text" autocomplete="name" maxlength="60">
+            <div class="err" id="ieName" role="alert"></div>
+          </div>
+          <div class="field">
+            <label for="iGroup">Grade and section</label>
+            <input class="input" id="iGroup" name="group" type="text" list="groupList" maxlength="40" placeholder="e.g. 12 ABM-1, or Teacher">
+            <div class="hint">Or type Teacher, Staff, or Other.</div>
+            <div class="err" id="ieGroup" role="alert"></div>
+          </div>
+          <div class="field full">
+            <label for="iNotes">Your question</label>
+            <textarea class="input" id="iNotes" name="notes" maxlength="500"></textarea>
+            <div class="err" id="ieNotes" role="alert"></div>
+          </div>
+        </div>
+        <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="iWebsite" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <p class="form-msg" id="iFormMsg" role="alert"></p>
+        <button class="btn btn-primary" type="button" id="iSubmitBtn" style="margin-top:14px;width:100%">Create my message</button>
+      </form>
+
+      <div class="result" id="iResult" hidden>
+        <h3 id="iResultTitle">Your message is ready</h3>
+        <p class="send-status" id="iSendStatus" role="status" hidden></p>
+        <p id="iResultHelp">Send this to us on Instagram or TikTok and we will get back to you.</p>
+        <label class="sr-only" for="iMsgOut">Your message</label>
+        <textarea class="input" id="iMsgOut" readonly></textarea>
+        <div class="result-btns">
+          <button class="btn btn-small btn-primary" type="button" id="iCopyBtn">Copy message</button>
+          <a class="btn btn-small btn-yellow" href="https://www.instagram.com/turondagowch/" target="_blank" rel="noopener noreferrer" data-social="instagram">Open Instagram</a>
+          <a class="btn btn-small" href="https://www.tiktok.com/@turondagoat" target="_blank" rel="noopener noreferrer" data-social="tiktok">Open TikTok</a>
+        </div>
+        <p class="copy-status" id="iCopyStatus" role="status">If the copy button does nothing, select the text in the box and copy it.</p>
       </div>
     </div>
   </div>
@@ -924,7 +984,8 @@ const ORDER_SUBMIT = {
     name: "entry.548182127",
     group: "entry.746743575",       // grade and section
     turon: "entry.651706916",
-    ice: "entry.1674768749",
+    ice: "entry.1674768749",        // no longer asked on the site (one fixed scoop); leave as is
+    toppings: "",                   // TODO: add a "Toppings" question to the Google Form and paste its entry id here. Until then toppings are added to the notes.
     sauce: "entry.327890033",
     orders: "entry.758694737",      // number of orders
     payment: "entry.1350477244",    // Cash or GCash
@@ -940,25 +1001,29 @@ const SOCIAL = {
   // TODO: Facebook Messenger link goes here when provided. Not added on purpose.
 };
 
-// Flavors. Add a new one by adding a line to the right list (ice cream list may grow, the list may grow).
+// Flavors. Add a new one by adding a line to the right list.
+// Ice cream has no flavor choice: every box gets one scoop, drawn in ICE_SCOOP_COLOR.
 // body = turon wrapper color, fill = turon filling color, color = dot/scoop/sauce color, accent = marks a dark swatch
 const FLAVORS = {
   turon: [
     { id: "plain",     name: "Plain",     body: "#C98A3B", fill: "#F4C542", color: "#F4C542" },
     { id: "chocolate", name: "Chocolate", body: "#7A4326", fill: "#4B2E24", color: "#4B2E24" },
     { id: "ube",       name: "Ube",       body: "#A8708F", fill: "#8E5BB5", color: "#7A4FA0" },
-    { id: "cheese",    name: "Cheese",    body: "#D9A441", fill: "#FFE08A", color: "#FFE08A" }
-  ],
-  ice: [
-    { id: "vanilla",   name: "Vanilla",   color: "#FBE9B7" },
-    { id: "chocolate", name: "Chocolate", color: "#6A3B2B" }
+    { id: "cheese",    name: "Cheese",    body: "#D9A441", fill: "#FFE08A", color: "#FFE08A" },
+    { id: "milkycheese", name: "Milky Cheese", body: "#E3B766", fill: "#FFF3D6", color: "#FFF3D6" }   // ASSUMPTION: colors are a guess
   ],
   sauce: [
     { id: "chocolate", name: "Chocolate", color: "#3A1F15" },
-    { id: "vanilla",   name: "Vanilla",   color: "#FFFDF3" },
-    { id: "caramel",   name: "Caramel",   color: "#D98324" }
+    { id: "biscoff",   name: "Biscoff",   color: "#B5651D" }   // ASSUMPTION: color is a guess
+  ],
+  // Optional, pick any number. No extra charge is assumed (TODO: confirm).
+  topping: [
+    { id: "marshmallows", name: "Mini Marshmallows", color: "#FFFFFF" },
+    { id: "chocochips",   name: "Choco Chips",       color: "#3A1F15" },
+    { id: "hany",         name: "Crushed Hany",      color: "#C58B4E" }   // ASSUMPTION: Hany = the chocolate wafer snack; confirm
   ]
 };
+const ICE_SCOOP_COLOR = "#FBE9B7";
 
 // TODO: confirm each member is okay with their name and photo being public. Confirm spelling of Sebastian's first name (Neo vs Neyo).
 // photo: "" shows initials. Add a public HTTPS URL or small base64 data URI to show a photo.
@@ -986,8 +1051,8 @@ const GALLERY = [
 
 // FAQ. {price} and {pieces} are filled in from the constants above.
 const FAQ = [
-  { q: "What is Saba-Zero?",            a: "Warm, crispy mini-turon bites served with ice cream and sauce drizzles, a hot-and-cold twist on a classic Filipino merienda." },
-  { q: "What flavors can I choose?",    a: "Turon: Plain, Chocolate, Ube, Cheese. Ice cream: Vanilla, Chocolate. Sauce: Chocolate, Vanilla, Caramel." },
+  { q: "What is Saba-Zero?",            a: "Warm, crispy mini-turon bites served with ice cream, sauce drizzles and toppings, a hot-and-cold twist on a classic Filipino merienda." },
+  { q: "What flavors can I choose?",    a: "Turon: Plain, Chocolate, Ube, Cheese, Milky Cheese. Sauce drizzle: Chocolate or Biscoff. Toppings (optional): Mini Marshmallows, Choco Chips, Crushed Hany. Every box comes with one scoop of ice cream." },
   { q: "How much is it?",               a: "₱{price} per order of {pieces} pieces." },   // tentative, see PRICE note above
   { q: "Where can I buy it?",           a: "At our booth on campus at Br. Donato Hall, La Salle College Antipolo." },
   { q: "Can I pre-order?",              a: "Yes. Send us your order on Instagram or TikTok ahead of time so we can have it ready during break." },
@@ -1022,6 +1087,7 @@ const FAQ = [
     return el;
   }
   function find(group, id) { return FLAVORS[group].filter(function (f) { return f.id === id; })[0] || FLAVORS[group][0]; }
+  function toppingNames() { return FLAVORS.topping.filter(function (f) { return sel.top.indexOf(f.id) > -1; }).map(function (f) { return f.name; }); }
   function peso(n) { return "₱" + n; }
   function gcashFmt() { var d = String(GCASH_NUMBER).replace(/\D/g, ""); return d.length === 11 ? d.slice(0, 4) + " " + d.slice(4, 7) + " " + d.slice(7) : d; }
   function fill(str) { return str.replace("{price}", PRICE).replace("{pieces}", PIECES_PER_ORDER).replace("{gcash}", gcashFmt()); }
@@ -1059,7 +1125,7 @@ const FAQ = [
 
   /* ---------- menu lists ---------- */
   function renderMenu() {
-    [["turon", "#listTuron", "#turonCount", "flavors"], ["ice", "#listIce", "#iceCount", "flavors"], ["sauce", "#listSauce", "#sauceCount", "sauces"]].forEach(function (g) {
+    [["turon", "#listTuron", "#turonCount", "flavors"], ["sauce", "#listSauce", "#sauceCount", "sauces"], ["topping", "#listTopping", "#toppingCount", "toppings"]].forEach(function (g) {
       var ul = $(g[1]); ul.innerHTML = "";
       FLAVORS[g[0]].forEach(function (f) {
         ul.appendChild(h("li", null, [h("span", { "class": "dot", style: "background:" + f.color, "aria-hidden": "true" }), f.name]));
@@ -1069,12 +1135,12 @@ const FAQ = [
   }
 
   /* ---------- builder + form selects ---------- */
-  var sel = { turon: FLAVORS.turon[0].id, ice: FLAVORS.ice[0].id, sauce: FLAVORS.sauce[0].id };
-  var selectIds = { turon: "#fTuron", ice: "#fIce", sauce: "#fSauce" };
-  var chipHosts = { turon: "#chipsTuron", ice: "#chipsIce", sauce: "#chipsSauce" };
+  var sel = { turon: FLAVORS.turon[0].id, sauce: FLAVORS.sauce[0].id, top: [] };
+  var selectIds = { turon: "#fTuron", sauce: "#fSauce" };
+  var chipHosts = { turon: "#chipsTuron", sauce: "#chipsSauce" };
 
   function renderBuilder() {
-    ["turon", "ice", "sauce"].forEach(function (g) {
+    ["turon", "sauce"].forEach(function (g) {
       var host = $(chipHosts[g]); host.innerHTML = "";
       var select = $(selectIds[g]); select.innerHTML = "";
       FLAVORS[g].forEach(function (f) {
@@ -1087,6 +1153,15 @@ const FAQ = [
       select.value = sel[g];
       select.addEventListener("change", function () { setSel(g, select.value); });
     });
+    // toppings: checkboxes, shown in both the builder and the order form
+    [$("#chipsTopping"), $("#fToppings")].forEach(function (host) {
+      host.innerHTML = "";
+      FLAVORS.topping.forEach(function (f) {
+        var input = h("input", { type: "checkbox", name: "top-" + (host.id), value: f.id });
+        input.addEventListener("change", function () { setTopping(f.id, input.checked); });
+        host.appendChild(h("label", { "class": "chip" }, [input, h("span", null, [h("span", { "class": "dot", style: "background:" + f.color, "aria-hidden": "true" }), f.name])]));
+      });
+    });
     paintBuilder();
   }
   function setSel(g, id) {
@@ -1095,15 +1170,23 @@ const FAQ = [
     $(selectIds[g]).value = id;
     paintBuilder();
   }
+  function setTopping(id, on) {
+    var i = sel.top.indexOf(id);
+    if (on && i < 0) sel.top.push(id);
+    if (!on && i > -1) sel.top.splice(i, 1);
+    paintBuilder();
+  }
   function paintBuilder() {
-    var t = find("turon", sel.turon), i = find("ice", sel.ice), s = find("sauce", sel.sauce);
+    var t = find("turon", sel.turon), s = find("sauce", sel.sauce);
     var svg = $("#boxSvg");
     svg.style.setProperty("--b-turon", t.body);
     svg.style.setProperty("--b-fill", t.fill);
-    svg.style.setProperty("--b-ice", i.color);
+    svg.style.setProperty("--b-ice", ICE_SCOOP_COLOR);
     svg.style.setProperty("--b-sauce", s.color);
-    svg.setAttribute("data-ice", i.id);
-    $("#bSummary").textContent = t.name + " turon, " + i.name + " scoop, " + s.name + " drizzle";
+    svg.setAttribute("data-top", sel.top.join(" "));
+    $$('#chipsTopping input, #fToppings input').forEach(function (c) { c.checked = sel.top.indexOf(c.value) > -1; });
+    var tops = toppingNames();
+    $("#bSummary").textContent = t.name + " turon, " + s.name + " drizzle, " + (tops.length ? tops.join(", ") : "no toppings");
   }
 
   /* ---------- scrolling that works inside a sandboxed / srcdoc iframe ---------- */
@@ -1142,7 +1225,6 @@ const FAQ = [
   /* ---------- builder -> order form ---------- */
   $("#bOrder").addEventListener("click", function () {
     if (ORDER_FORM_URL) return;
-    setMode("order");
   });
 
   /* ---------- gallery + lightbox ---------- */
@@ -1203,74 +1285,74 @@ const FAQ = [
   }
 
   /* ---------- order / inquiry form ---------- */
-  var form = $("#orderForm"), mode = "order";
-  function setMode(m) {
-    mode = m;
-    $$('input[name="mode"]').forEach(function (r) { r.checked = (r.value === m); });
-    $$("[data-order-only]").forEach(function (f) { f.hidden = (m !== "order"); });
-    $("#notesLab").textContent = m === "order" ? "Notes (optional)" : "Your question";
-    $("#totalBox").hidden = (m !== "order");
-    $("#submitBtn").textContent = "Create my message";
-    clearErrors(); updateTotal();
-  }
+  var form = $("#orderForm"), iForm = $("#inquiryForm");
   function qtyValue() { var n = parseInt($("#fQty").value, 10); return isFinite(n) ? n : 0; }
   function updateTotal() {
     var n = qtyValue(), ok = n >= 1 && n <= MAX_ORDERS;
     $("#totalVal").textContent = ok ? peso(n * PRICE) : peso(0);
   }
-  function clearErrors() {
-    ["Name", "Group", "Qty", "Pay", "Notes"].forEach(function (k) { var e = $("#e" + k); if (e) e.textContent = ""; });
-    $$(".input").forEach(function (i) { i.removeAttribute("aria-invalid"); });
-    $("#formMsg").textContent = "";
+  function clearErrors(scope) {
+    $$(scope + " .err").forEach(function (e) { e.textContent = ""; });
+    $$(scope + " .input").forEach(function (i) { i.removeAttribute("aria-invalid"); });
+    $$(scope + " .form-msg").forEach(function (e) { e.textContent = ""; });
   }
   function fail(inputSel, errId, text, list) { var el = $(inputSel); if (el) el.setAttribute("aria-invalid", "true"); $(errId).textContent = text; list.push(el); }
-  function validate() {
-    clearErrors();
-    var bad = [];
-    if (!$("#fName").value.trim()) fail("#fName", "#eName", "Add your name so we know who to look for.", bad);
-    if (!$("#fGroup").value.trim()) fail("#fGroup", "#eGroup", "Add your grade and section, or type Teacher, Staff, or Other.", bad);
-    if (mode === "order") {
-      var n = qtyValue();
-      if (!(n >= 1 && n <= MAX_ORDERS)) fail("#fQty", "#eQty", "Enter a number of orders from 1 to " + MAX_ORDERS + ".", bad);
-      if (!$('input[name="pay"]:checked')) { $("#ePay").textContent = "Choose Cash or GCash."; bad.push($('input[name="pay"]')); }
-    } else if (!$("#fNotes").value.trim()) fail("#fNotes", "#eNotes", "Type your question so we can answer it.", bad);
+  function finishValidate(bad, msgSel) {
     if (bad.length) {
-      $("#formMsg").textContent = "Please fix the " + (bad.length === 1 ? "field" : bad.length + " fields") + " marked above.";
+      $(msgSel).textContent = "Please fix the " + (bad.length === 1 ? "field" : bad.length + " fields") + " marked above.";
       try { bad[0].focus(); } catch (e) {}
       return false;
     }
     return true;
   }
-  function buildMessage() {
+  function validateOrder() {
+    clearErrors("#orderForm");
+    var bad = [];
+    if (!$("#fName").value.trim()) fail("#fName", "#eName", "Add your name so we know who to look for.", bad);
+    if (!$("#fGroup").value.trim()) fail("#fGroup", "#eGroup", "Add your grade and section, or type Teacher, Staff, or Other.", bad);
+    var n = qtyValue();
+    if (!(n >= 1 && n <= MAX_ORDERS)) fail("#fQty", "#eQty", "Enter a number of orders from 1 to " + MAX_ORDERS + ".", bad);
+    if (!$('input[name="pay"]:checked')) { $("#ePay").textContent = "Choose Cash or GCash."; bad.push($('input[name="pay"]')); }
+    return finishValidate(bad, "#formMsg");
+  }
+  function validateInquiry() {
+    clearErrors("#inquiryForm");
+    var bad = [];
+    if (!$("#iName").value.trim()) fail("#iName", "#ieName", "Add your name so we know who to reply to.", bad);
+    if (!$("#iGroup").value.trim()) fail("#iGroup", "#ieGroup", "Add your grade and section, or type Teacher, Staff, or Other.", bad);
+    if (!$("#iNotes").value.trim()) fail("#iNotes", "#ieNotes", "Type your question so we can answer it.", bad);
+    return finishValidate(bad, "#iFormMsg");
+  }
+  function buildOrderMessage() {
     var name = $("#fName").value.trim(), grp = $("#fGroup").value.trim(), notes = $("#fNotes").value.trim(), L = [];
-    if (mode === "order") {
-      var n = qtyValue(), brk = $("#fBreak").value.trim();
-      L.push("Hi Turon-Da-Go! I would like to pre-order Saba-Zero.", "");
-      L.push("Name: " + name, "Grade and section: " + grp, "");
-      L.push("Turon: " + find("turon", sel.turon).name);
-      L.push("Ice cream: " + find("ice", sel.ice).name);
-      L.push("Sauce drizzle: " + find("sauce", sel.sauce).name);
-      L.push("Orders: " + n + " (" + (n * PIECES_PER_ORDER) + " pieces)");
-      L.push("Payment: " + $('input[name="pay"]:checked').value);
-      if (brk) L.push("Preferred break time: " + brk);
-      if (notes) L.push("Notes: " + notes);
-      L.push("", "Estimated total: " + peso(n * PRICE));
-    } else {
-      L.push("Hi Turon-Da-Go! I have a question.", "", "Name: " + name, "Grade and section: " + grp, "", notes);
-    }
+    var n = qtyValue(), brk = $("#fBreak").value.trim(), tops = toppingNames();
+    L.push("Hi Turon-Da-Go! I would like to pre-order Saba-Zero.", "");
+    L.push("Name: " + name, "Grade and section: " + grp, "");
+    L.push("Turon: " + find("turon", sel.turon).name);
+    L.push("Sauce drizzle: " + find("sauce", sel.sauce).name);
+    L.push("Toppings: " + (tops.length ? tops.join(", ") : "None"));
+    L.push("Orders: " + n + " (" + (n * PIECES_PER_ORDER) + " pieces)");
+    L.push("Payment: " + $('input[name="pay"]:checked').value);
+    if (brk) L.push("Preferred break time: " + brk);
+    if (notes) L.push("Notes: " + notes);
+    L.push("", "Estimated total: " + peso(n * PRICE));
     return L.join("\n");
   }
+  function buildInquiryMessage() {
+    return ["Hi Turon-Da-Go! I have a question.", "", "Name: " + $("#iName").value.trim(), "Grade and section: " + $("#iGroup").value.trim(), "", $("#iNotes").value.trim()].join("\n");
+  }
   // Sandboxed embeds usually lack "allow-forms", which silently blocks native form submission.
-  // So the button is type="button" and we handle click + Enter ourselves. Nothing is ever posted anywhere.
-  var sending = false, lastSent = "";
+  // So the buttons are type="button" and we handle click + Enter ourselves.
   function orderData() {
-    var d = { type: mode === "order" ? "Order" : "Inquiry", name: $("#fName").value.trim(), group: $("#fGroup").value.trim(), notes: $("#fNotes").value.trim() };
-    if (mode === "order") {
-      var n = qtyValue();
-      d.turon = find("turon", sel.turon).name; d.ice = find("ice", sel.ice).name; d.sauce = find("sauce", sel.sauce).name;
-      d.orders = String(n); d.payment = $('input[name="pay"]:checked').value; d.breakTime = $("#fBreak").value.trim(); d.total = peso(n * PRICE);
-    }
-    return d;
+    var n = qtyValue(), notes = $("#fNotes").value.trim(), tops = toppingNames().join(", ");
+    // until the Google Form has a Toppings question (ORDER_SUBMIT.fields.toppings), toppings ride along in the notes
+    if (!ORDER_SUBMIT.fields.toppings) notes = ("Toppings: " + (tops || "None") + (notes ? " | " + notes : ""));
+    return { type: "Order", name: $("#fName").value.trim(), group: $("#fGroup").value.trim(), notes: notes, toppings: tops || "None",
+      turon: find("turon", sel.turon).name, sauce: find("sauce", sel.sauce).name,
+      orders: String(n), payment: $('input[name="pay"]:checked').value, breakTime: $("#fBreak").value.trim(), total: peso(n * PRICE) };
+  }
+  function inquiryData() {
+    return { type: "Inquiry", name: $("#iName").value.trim(), group: $("#iGroup").value.trim(), notes: $("#iNotes").value.trim() };
   }
   // Posts to the Google Form with no-cors fetch. (A normal form post is blocked in sandboxed embeds, and the reply is opaque,
   // so "sent" means the browser delivered it; check your Sheet to confirm rows arrive.)
@@ -1280,56 +1362,84 @@ const FAQ = [
     var timeout = new Promise(function (_, rej) { setTimeout(function () { rej(new Error("timeout")); }, 20000); });
     return Promise.race([fetch(ORDER_SUBMIT.formResponseUrl, { method: "POST", mode: "no-cors", body: body }), timeout]);
   }
-  function setSendState(state) {
-    var st = $("#sendStatus"), title = $("#resultTitle"), help = $("#resultHelp"), btn = $("#submitBtn");
+
+  // One widget = one config. Both widgets share the same submit / status / copy logic.
+  var widgets = {
+    order: {
+      sending: false, lastSent: "", ids: { btn: "#submitBtn", res: "#result", out: "#msgOut", st: "#sendStatus", title: "#resultTitle", help: "#resultHelp", copy: "#copyStatus", hp: "#fWebsite" },
+      validate: validateOrder, build: buildOrderMessage, data: orderData, noun: "order",
+      readyTitle: "Your message is ready", readyHelp: "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus.",
+      sentText: "Order sent! We got your details and will confirm with you on Instagram or TikTok.", sentTitle: "Order sent",
+      sentHelp: "Backup: you can also send this message to us on Instagram or TikTok.",
+      failHelp: "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus."
+    },
+    inquiry: {
+      sending: false, lastSent: "", ids: { btn: "#iSubmitBtn", res: "#iResult", out: "#iMsgOut", st: "#iSendStatus", title: "#iResultTitle", help: "#iResultHelp", copy: "#iCopyStatus", hp: "#iWebsite" },
+      validate: validateInquiry, build: buildInquiryMessage, data: inquiryData, noun: "question",
+      readyTitle: "Your message is ready", readyHelp: "Send this to us on Instagram or TikTok and we will get back to you.",
+      sentText: "Question sent! We got it and will reply on Instagram or TikTok.", sentTitle: "Question sent",
+      sentHelp: "Backup: you can also send this message to us on Instagram or TikTok.",
+      failHelp: "Send this to us on Instagram or TikTok and we will get back to you."
+    }
+  };
+  function setSendState(w, state) {
+    var I = w.ids, st = $(I.st), title = $(I.title), help = $(I.help), btn = $(I.btn);
     st.className = "send-status"; st.hidden = false;
     btn.disabled = (state === "sending");
-    if (state === "sending") { st.textContent = "Sending your order to Turon-Da-Go..."; title.textContent = "Sending your order"; }
-    else if (state === "sent") { st.classList.add("ok"); st.textContent = "Order sent! We got your details and will confirm with you on Instagram or TikTok."; title.textContent = "Order sent"; help.textContent = "Backup: you can also send this message to us on Instagram or TikTok."; }
-    else if (state === "dup") { st.classList.add("ok"); st.textContent = "This order was already sent. Change something to send a new one."; title.textContent = "Order sent"; }
-    else { st.classList.add("bad"); st.textContent = "We could not confirm that your order was sent. Please copy the message below and send it to us on Instagram or TikTok so we do not miss it."; title.textContent = "Your message is ready"; help.textContent = "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus."; }
+    if (state === "sending") { st.textContent = "Sending your " + w.noun + " to Turon-Da-Go..."; title.textContent = "Sending your " + w.noun; }
+    else if (state === "sent") { st.classList.add("ok"); st.textContent = w.sentText; title.textContent = w.sentTitle; help.textContent = w.sentHelp; }
+    else if (state === "dup") { st.classList.add("ok"); st.textContent = "This " + w.noun + " was already sent. Change something to send a new one."; title.textContent = w.sentTitle; }
+    else { st.classList.add("bad"); st.textContent = "We could not confirm that your " + w.noun + " was sent. Please copy the message below and send it to us on Instagram or TikTok so we do not miss it."; title.textContent = w.readyTitle; help.textContent = w.failHelp; }
   }
-  function submitForm() {
-    if (sending) return;
-    if (!validate()) { $("#result").hidden = true; return; }
-    var msg = buildMessage();
-    $("#msgOut").value = msg;
-    var res = $("#result"); res.hidden = false;
-    $("#gcashNote").hidden = !(mode === "order" && $('input[name="pay"]:checked').value === "GCash");
-    $("#copyStatus").textContent = "If the copy button does nothing, select the text in the box and copy it.";
-    $("#resultTitle").textContent = "Your message is ready";
-    $("#resultHelp").textContent = "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus.";
-    $("#sendStatus").hidden = true;
-    goTo("result", false);
-    $("#msgOut").focus();
+  function submitWidget(key) {
+    var w = widgets[key], I = w.ids;
+    if (w.sending) return;
+    if (!w.validate()) { $(I.res).hidden = true; return; }
+    var msg = w.build();
+    $(I.out).value = msg;
+    $(I.res).hidden = false;
+    if (key === "order") $("#gcashNote").hidden = ($('input[name="pay"]:checked').value !== "GCash");
+    $(I.copy).textContent = "If the copy button does nothing, select the text in the box and copy it.";
+    $(I.title).textContent = w.readyTitle;
+    $(I.help).textContent = w.readyHelp;
+    $(I.st).hidden = true;
+    goTo(I.res.slice(1), false);
+    $(I.out).focus();
     if (!ORDER_SUBMIT.formResponseUrl) return;               // live orders switched off: message only
-    if ($("#fWebsite").value) return;                         // spam trap filled in: do not send
-    if (msg === lastSent) { setSendState("dup"); return; }   // no duplicate rows
-    sending = true; setSendState("sending");
-    sendToForm(orderData()).then(function () { lastSent = msg; setSendState("sent"); },
-                                 function () { setSendState("fail"); })
-                           .then(function () { sending = false; $("#submitBtn").disabled = false; });
+    if ($(I.hp).value) return;                                // spam trap filled in: do not send
+    if (msg === w.lastSent) { setSendState(w, "dup"); return; }   // no duplicate rows
+    w.sending = true; setSendState(w, "sending");
+    sendToForm(w.data()).then(function () { w.lastSent = msg; setSendState(w, "sent"); },
+                              function () { setSendState(w, "fail"); })
+                        .then(function () { w.sending = false; $(I.btn).disabled = false; });
   }
-  form.addEventListener("submit", function (e) { e.preventDefault(); submitForm(); });
-  $("#submitBtn").addEventListener("click", submitForm);
-  form.addEventListener("keydown", function (e) {
-    if (e.key === "Enter" && e.target && e.target.tagName === "INPUT" && e.target.type !== "radio") { e.preventDefault(); submitForm(); }
-  });
+  function wireWidget(key, formEl) {
+    formEl.addEventListener("submit", function (e) { e.preventDefault(); submitWidget(key); });
+    $(widgets[key].ids.btn).addEventListener("click", function () { submitWidget(key); });
+    formEl.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && e.target && e.target.tagName === "INPUT" && e.target.type !== "radio" && e.target.type !== "checkbox") { e.preventDefault(); submitWidget(key); }
+    });
+  }
+  wireWidget("order", form);
+  wireWidget("inquiry", iForm);
   form.addEventListener("input", function () { updateTotal(); });
-  $$('input[name="mode"]').forEach(function (r) { r.addEventListener("change", function () { setMode(r.value); $("#result").hidden = true; }); });
-  $("#copyBtn").addEventListener("click", function () {
-    var ta = $("#msgOut"), st = $("#copyStatus"), ok = false;
-    ta.focus(); ta.select();
-    function done() {
-      st.textContent = ok ? "Copied. Now paste it into a message to us on Instagram or TikTok." : "Could not copy automatically. The text is selected: press Ctrl+C (or tap and hold, then Copy).";
-    }
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(ta.value).then(function () { ok = true; done(); }, function () { legacy(); });
-      } else legacy();
-    } catch (err) { legacy(); }
-    function legacy() { try { ok = document.execCommand("copy"); } catch (e) { ok = false; } done(); }
-  });
+  function wireCopy(btnSel, outSel, statusSel) {
+    $(btnSel).addEventListener("click", function () {
+      var ta = $(outSel), st = $(statusSel), ok = false;
+      ta.focus(); ta.select();
+      function done() {
+        st.textContent = ok ? "Copied. Now paste it into a message to us on Instagram or TikTok." : "Could not copy automatically. The text is selected: press Ctrl+C (or tap and hold, then Copy).";
+      }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(ta.value).then(function () { ok = true; done(); }, function () { legacy(); });
+        } else legacy();
+      } catch (err) { legacy(); }
+      function legacy() { try { ok = document.execCommand("copy"); } catch (e) { ok = false; } done(); }
+    });
+  }
+  wireCopy("#copyBtn", "#msgOut", "#copyStatus");
+  wireCopy("#iCopyBtn", "#iMsgOut", "#iCopyStatus");
 
   /* ---------- scroll reveal (CSS shows everything if JS or IntersectionObserver is missing) ---------- */
   function initReveal() {
@@ -1346,7 +1456,7 @@ const FAQ = [
     applyConstants();
     renderMenu(); renderBuilder(); renderGallery(); renderTeam(); renderFaq();
     applyImages();
-    setMode("order");
+    updateTotal();
     initReveal();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();

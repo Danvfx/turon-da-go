@@ -26,14 +26,14 @@ Double-click `embed-test.html`. It loads the site inside a locked-down frame (li
 
 For the closest match to Google Sites, click **Pasted code (srcdoc)** and choose `index.html`.
 
-Check: menu links scroll, the Order form builds a message, Instagram and TikTok open in a new tab.
+Check: menu links scroll, the Order form and the Inquiry form each build a message, Instagram and TikTok open in a new tab.
 
 ## 3. Change things (open `index.html`, search for the word in quotes)
 
 All editable data is in the second `<script>` block, under **SITE CONFIG**.
 
 - **Price:** search `const PRICE`. Change the number once and every place updates (hero sticker, pricing, FAQ, order total).
-- **Flavors:** search `const FLAVORS`. Add a line to the `ice` list for a new ice cream flavor (copy a line, change `id`, `name`, `color`).
+- **Flavors, drizzles, toppings:** search `const FLAVORS`. Add a line to the `turon`, `sauce` or `topping` list (copy a line, change `id`, `name`, `color`). Ice cream has no flavor choice; its color is `ICE_SCOOP_COLOR`.
 - **Team:** search `const TEAM`. Add a photo by pasting an image link into `photo`.
 - **FAQ:** search `const FAQ`.
 - **Social links:** search `const SOCIAL`.
