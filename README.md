@@ -60,7 +60,7 @@ Pressing **Create my order** also sends the order to your Google Form in the bac
 
 Rules for the Google Form (otherwise orders are silently lost):
 
-1. **No file-upload question.** A file-upload question forces every respondent to sign in to Google, which blocks the site from posting. Receipts for GCash are sent by DM instead.
+1. **No file-upload question.** A file-upload question forces every respondent to sign in to Google, which blocks the site from posting. GCash customers type their receipt's reference number into a normal text question ("Reference No.") instead.
 2. **Do not turn on "Limit to 1 response", "Collect email addresses", or "Restrict to users in your organization".** Each one needs a sign-in or extra data the site does not send.
 3. **Option text must match exactly.** The drizzle, topping and flavor names in the form must match the `FLAVORS` list in `index.html` (for example `Biscoff ( +₱10.00 )`). If you rename an option in the form, rename it in `FLAVORS` too.
 4. **Pages.** The form has 10 pages. The site tells Google which pages were visited (`ORDER_SUBMIT.pages`). If you add, remove or reorder pages or questions, update `ORDER_SUBMIT`.

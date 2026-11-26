@@ -816,6 +816,10 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
           <div class="field full" id="payBox" data-order-only hidden>
             <p class="hint-box" id="payHint"></p>
           </div>
+          <div class="field full" id="refField" hidden>
+            <label for="fRef">GCash reference number</label>
+            <input class="input" id="fRef" name="reference" type="text" inputmode="numeric" maxlength="40" placeholder="From your GCash receipt (optional)">
+          </div>
 
           <div class="field full" data-inquiry-only hidden>
             <label for="fNotes">Your question</label>
@@ -979,6 +983,7 @@ const ORDER_FORM_URL = "";
 // LIVE ORDERS: "Create my order" posts the order in the background to this Google Form, and each order becomes a row in
 // the form's Google Sheet. Leave formResponseUrl "" to turn it off.
 // IMPORTANT: the form must NOT have a file-upload question, because that forces a Google sign-in and blocks the post.
+// (Its old receipt-screenshot question was replaced by a "Reference No." text field.)
 // The form has several pages, so Google drops a post unless it lists the pages visited (pageHistory, built below).
 const ORDER_SUBMIT = {
   formResponseUrl: "https://docs.google.com/forms/d/e/1FAIpQLSeF5hbe4Er071cvLcbscFbWkgCOY3X7DL6DK95sun4PRVQhQg/formResponse",
@@ -997,7 +1002,8 @@ const ORDER_SUBMIT = {
     extraToppings: "entry.937066964",    // tick boxes, one value per extra
     modality: "entry.822550709",         // Pick-Up or Delivery
     location: "entry.299870308",         // delivery location
-    payment: "entry.1331241660"          // Cash or GCash
+    payment: "entry.1331241660",         // Cash or GCash
+    reference: "entry.1496036755"        // GCash reference number (optional, GCash page only)
   },
   // Page numbers in the Google Form (0 = first page):
   // 0 intro, 1 profile, 2 turon, 3 drizzle, 4 toppings, 5 add-ons, 6 pick-up or delivery,
@@ -1065,7 +1071,7 @@ const FAQ = [
   { q: "Where can I pick it up?",       a: "At our booth at the {pickup}, during authorized school break windows." },
   { q: "Can I pre-order?",              a: "Yes. Build your box on this page and send your order, or message us on Instagram or TikTok ahead of time so we can have it ready during break. We confirm using the contact method you choose." },
   { q: "Do you deliver?",               a: "Yes, within campus. Choose Delivery when you order and tell us the room or building area. We do not offer off-campus delivery." },
-  { q: "How do I pay?",                 a: "Cash (pay when you pick up or when we deliver) or GCash ({gcash}, {gcashname}). If you pay with GCash, send us a screenshot of your receipt on Instagram or Facebook/Messenger so we can confirm your order." },
+  { q: "How do I pay?",                 a: "Cash (pay when you pick up or when we deliver) or GCash ({gcash}, {gcashname}). If you pay with GCash, enter the reference number from your receipt when you order so we can confirm it." },
   { q: "When are you open?",            a: "During authorized school break windows set by the LSCA administration." },   // no exact times on purpose
   { q: "Is it safe and hygienic?",      a: "We follow strict food safety and hygiene practices and prepare each order fresh." },
   // TODO / ASSUMPTION: allergen info was not provided. Confirm with the group before keeping this text.
@@ -1347,10 +1353,11 @@ const FAQ = [
     $("#locField").hidden = !(mode === "order" && mod === "Delivery");
     $("#modHint").textContent = mod === "Delivery" ? "We deliver within campus. Tell us the room or building area below."
       : mod === "Pick-Up" ? "Pick up at the " + PICKUP_SPOT + " during authorized break windows." : "";
+    $("#refField").hidden = !(mode === "order" && pay === "GCash");
     var pb = $("#payBox");
     pb.hidden = !(mode === "order" && pay);
     $("#payHint").textContent = pay === "GCash"
-      ? "GCash: " + gcashFmt() + " (" + GCASH_NAME + "). Pay first, then send a screenshot of your receipt to us on Instagram or Facebook/Messenger so we can confirm your order."
+      ? "GCash: " + gcashFmt() + " (" + GCASH_NAME + "). Pay first, then enter the reference number from your receipt below so we can confirm your order."
       : pay === "Cash" ? "Pay in cash when you pick up or when we deliver." : "";
   }
   function clearErrors() {
@@ -1391,6 +1398,7 @@ const FAQ = [
       L.push("Extras: " + (ex.length ? ex.join(", ") : "none"), "");
       L.push(mod === "Delivery" ? "Delivery to: " + $("#fLoc").value.trim() : "Pick-up at: " + PICKUP_SPOT);
       L.push("Payment: " + radioVal("pay"));
+      if (radioVal("pay") === "GCash" && $("#fRef").value.trim()) L.push("GCash reference no.: " + $("#fRef").value.trim());
       L.push("", "Estimated total: " + peso(total()));
     } else {
       L.push("Hi Turon-Da-Go! I have a question.", "", "Name: " + name, "Grade and section: " + grp, "", $("#fNotes").value.trim());
@@ -1404,7 +1412,8 @@ const FAQ = [
       drizzle: find("drizzle", st.drizzle).form, topping: find("topping", st.topping).name,
       xd: st.xd.map(function (id) { return find("drizzle", id).name; }),
       xt: st.xt.map(function (id) { return find("topping", id).name; }),
-      modality: radioVal("modality"), location: $("#fLoc").value.trim(), payment: radioVal("pay")
+      modality: radioVal("modality"), location: $("#fLoc").value.trim(), payment: radioVal("pay"),
+      reference: radioVal("pay") === "GCash" ? $("#fRef").value.trim() : ""
     };
   }
   // Posts to the Google Form with no-cors fetch. (A normal form post is blocked in sandboxed embeds, and the reply is opaque,
@@ -1420,6 +1429,7 @@ const FAQ = [
     add("modality", d.modality);
     if (d.modality === "Delivery") add("location", d.location);
     add("payment", d.payment);
+    if (d.payment === "GCash") add("reference", d.reference);
     var pg = ORDER_SUBMIT.pages, pages = pg.base.slice();
     if (d.modality === "Delivery") pages.push(pg.delivery);
     pages.push(pg.payment);
@@ -1445,7 +1455,7 @@ const FAQ = [
     $("#msgOut").value = msg;
     $("#result").hidden = false;
     var gn = $("#gcashNote");
-    if (mode === "order" && radioVal("pay") === "GCash") { gn.hidden = false; gn.textContent = "Paying with GCash? Our GCash number is " + gcashFmt() + " (" + GCASH_NAME + "). Send us a screenshot of your receipt."; }
+    if (mode === "order" && radioVal("pay") === "GCash") { gn.hidden = false; gn.textContent = "Paying with GCash? Our GCash number is " + gcashFmt() + " (" + GCASH_NAME + "). Keep your receipt in case we ask for the reference number."; }
     else gn.hidden = true;
     $("#copyStatus").textContent = "If the copy button does nothing, select the text in the box and copy it.";
     $("#resultTitle").textContent = "Your message is ready";
