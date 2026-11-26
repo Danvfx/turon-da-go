@@ -32,8 +32,8 @@ Check: menu links scroll, the Order form builds a message, Instagram and TikTok 
 
 All editable data is in the second `<script>` block, under **SITE CONFIG**.
 
-- **Price:** search `const PRICE`. Change the number once and every place updates (hero sticker, pricing, FAQ, order total).
-- **Flavors:** search `const FLAVORS`. Add a line to the `ice` list for a new ice cream flavor (copy a line, change `id`, `name`, `color`).
+- **Prices:** search `const PRICE` (box), `BISCOFF_UPCHARGE`, `EXTRA_DRIZZLE`, `EXTRA_TOPPING`. Change a number once and every place updates (hero sticker, pricing, FAQ, builder and order totals).
+- **Flavors:** search `const FLAVORS`. Add a line to the `turon`, `drizzle` or `topping` list (copy a line, change `id`, `name`, `color`; `form` must match the Google Form option).
 - **Team:** search `const TEAM`. Add a photo by pasting an image link into `photo`.
 - **FAQ:** search `const FAQ`.
 - **Social links:** search `const SOCIAL`.
@@ -54,17 +54,20 @@ Only use photos you took or have permission to use.
 - **Default (no setup):** visitors fill the form, the site writes a ready-made message with the estimated total, they copy it and send it to your Instagram or TikTok.
 - **Google Form upgrade:** make a Google Form, click Send > link, and paste the link into `const ORDER_FORM_URL = "";`. Every Order button then opens your form in a new tab, and answers land in a Google Sheet.
 
-## 5b. Live orders into a Google Sheet (recommended for demos)
+## 5b. Live orders into a Google Sheet
 
-When this is on, tapping **Create my message** also sends the order to a Google Form in the background. Each order becomes a new row in a Google Sheet, and the visitor sees "Order sent". The copy-and-send message stays as a backup.
+Pressing **Create my order** also sends the order to your Google Form in the background. Each order becomes a new row in the form's Google Sheet, and the visitor sees "Order sent". The copy-and-send message stays as a backup. Inquiries are message-only and are not sent to the Sheet.
 
-1. Make a Google Form. Add these questions **in this order**, all as **Short answer** (use Paragraph for the last two): Order type, Name, Grade and section, Turon flavor, Ice cream flavor, Sauce, Number of orders, Payment method, Preferred break time, Notes, Estimated total.
-2. In the form's **Responses** tab, click **Link to Sheets**.
-3. Send the form's share link to whoever maintains the site. They fill in `ORDER_SUBMIT` (search for it in `index.html`) with the form address and each question's id.
-4. Leave `ORDER_FORM_URL` empty so visitors use this site's form instead of the Google Form page.
-5. Send one test order, then check the Sheet.
+Rules for the Google Form (otherwise orders are silently lost):
 
-Notes: Google does not tell the page whether the row was saved, so "Order sent" means the browser delivered it. Always check the Sheet during a demo. To turn live orders off, set `formResponseUrl` back to `""`.
+1. **No file-upload question.** A file-upload question forces every respondent to sign in to Google, which blocks the site from posting. Receipts for GCash are sent by DM instead.
+2. **Do not turn on "Limit to 1 response", "Collect email addresses", or "Restrict to users in your organization".** Each one needs a sign-in or extra data the site does not send.
+3. **Option text must match exactly.** The drizzle, topping and flavor names in the form must match the `FLAVORS` list in `index.html` (for example `Biscoff ( +₱10.00 )`). If you rename an option in the form, rename it in `FLAVORS` too.
+4. **Pages.** The form has 10 pages. The site tells Google which pages were visited (`ORDER_SUBMIT.pages`). If you add, remove or reorder pages or questions, update `ORDER_SUBMIT`.
+
+To switch to a different form later: open its public link, read each question's `entry.NNN` id (Google Forms > pre-filled link shows them), and fill in `ORDER_SUBMIT` in `index.html`. Leave `ORDER_FORM_URL` empty so visitors use this site's form.
+
+Google does not tell the page whether the row was saved, so "Order sent" means the browser delivered it. Always check the Sheet during a demo. To turn live orders off, set `formResponseUrl` back to `""`.
 
 ## 6. Good to know
 

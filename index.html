@@ -229,9 +229,9 @@ h2{font-weight:800;font-size:clamp(1.95rem,4.6vw,3.1rem)}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{position:relative;display:inline-flex}
 .chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;margin:0;cursor:pointer}
-.chip span{display:inline-flex;align-items:center;gap:.5em;font-family:var(--f-play);font-weight:500;font-size:.98rem;padding:.45em .95em .45em .7em;border-radius:999px;background:var(--white);border:2px solid var(--choc);transition:transform .25s var(--pop),background-color .15s}
+.chip > span{display:inline-flex;align-items:center;gap:.5em;font-family:var(--f-play);font-weight:500;font-size:.98rem;padding:.45em .95em .45em .7em;border-radius:999px;background:var(--white);border:2px solid var(--choc);transition:transform .25s var(--pop),background-color .15s}
 .chip .dot{width:.9em;height:.9em}
-.chip:hover span{transform:translateY(-2px) rotate(-1deg)}
+.chip:hover > span{transform:translateY(-2px) rotate(-1deg)}
 .chip input:checked + span{background:var(--choc);color:var(--cream)}
 .chip input:checked + span .dot{border-color:var(--cream)}
 .chip input:focus-visible + span{outline:3px solid var(--choc);outline-offset:3px}
@@ -241,8 +241,6 @@ h2{font-weight:800;font-size:clamp(1.95rem,4.6vw,3.1rem)}
 /* builder svg motion */
 .b-steam path{fill:none;stroke:var(--caramel);stroke-width:4;stroke-linecap:round;opacity:0;animation:steam 3.6s ease-in-out infinite}
 .b-steam path:nth-child(2){animation-delay:1.4s}
-#boxSvg .cc{display:none}
-#boxSvg[data-ice="cookies"] .cc{display:inline}
 
 /* ---------- Pricing ---------- */
 .caramel-bg{background:var(--caramel);color:var(--white)}
@@ -380,6 +378,26 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
 
 .noscript-bar{background:var(--choc);color:var(--cream);padding:12px 16px;text-align:center;font-weight:700}
 
+/* ---------- v2: new order form pieces ---------- */
+[hidden]{display:none!important}
+.chip-up{font-size:.82em;font-weight:600;opacity:.85}
+.flavors li .up{margin-left:auto;font-family:var(--f-play);font-weight:600;font-size:.82rem;background:var(--banana);border:2px solid var(--choc);border-radius:999px;padding:.05em .65em}
+.chips-lab{font-family:var(--f-play);font-weight:600;font-size:.9rem;margin:2px 0 6px}
+.pieces{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.pieces label{display:flex;flex-direction:column;gap:4px;font-family:var(--f-play);font-weight:600;font-size:.88rem}
+.input.sm{min-height:42px;padding:.45em .7em}
+.b-total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 1rem;font-family:var(--f-play);font-weight:600}
+.b-total b{font-family:var(--f-head);font-weight:900;font-size:1.7rem}
+.box-sum{background:var(--white);border:2px dashed var(--choc);border-radius:18px;padding:14px 16px}
+.box-sum h4{font-family:var(--f-play);font-weight:600;font-size:1rem;margin-bottom:.4rem}
+.box-sum li{font-weight:700;font-size:.98rem;line-height:1.5}
+.box-sum a{font-family:var(--f-play);font-weight:600;display:inline-block;margin-top:.5rem}
+.hint-box{background:var(--banana);border:2px solid var(--choc);border-radius:16px;padding:12px 14px;font-weight:700;margin:0}
+.extras-line{margin:0 0 1.2rem;font-weight:700}
+.fine{font-size:.88rem;font-weight:600;margin:.9rem 0 0;color:var(--choc-soft)}
+#boxSvg .top{display:none}
+#boxSvg[data-top="mm"] .top-mm,#boxSvg[data-top="cc"] .top-cc,#boxSvg[data-top="hn"] .top-hn{display:inline}
+
 /* ---------- Scroll reveal (content stays visible if JS fails) ---------- */
 .js .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .7s var(--pop);transition-delay:calc(var(--i,0) * 70ms)}
 .js .reveal.in{opacity:1;transform:none}
@@ -395,7 +413,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
 </head>
 
 <body>
-<noscript><div class="noscript-bar">Some parts of this page (menu lists, gallery, team, FAQ) need JavaScript. Quick facts: Saba-Zero is 4 mini-turon bites, 1 ice cream scoop and 1 sauce drizzle for &#8369;100. Order on Instagram @turondagowch or TikTok @turondagoat. Pay with Cash or GCash (0917 169 9187).</div></noscript>
+<noscript><div class="noscript-bar">Some parts of this page (menu lists, gallery, team, FAQ) need JavaScript. Quick facts: Saba-Zero is 4 mini-turon pieces, a scoop of vanilla ice cream, a drizzle and a topping for &#8369;89. Order on Instagram @turondagowch or TikTok @turondagoat. Pay with Cash or GCash (0917 169 9187).</div></noscript>
 
 <!-- =========================== NAV =========================== -->
 <header class="nav" id="nav">
@@ -429,7 +447,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <h1 id="h1">Your bite-size craving with a <span class="twist">twist!<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 30 2, 50 20, 80 10 S 130 2, 160 12 S 190 14, 197 6" fill="none" stroke="#A65E2E" stroke-width="7" stroke-linecap="round"/></svg></span></h1>
-      <p class="lede">Warm, crispy mini-turon bites, a cold scoop of ice cream, and a sauce drizzle. One box, made fresh on campus.</p>
+      <p class="lede">Warm, crispy mini-turon bites, a cold scoop of vanilla ice cream, and a sauce drizzle. One box, made fresh on campus.</p>
       <div class="hotcold" aria-hidden="true">
         <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="#A65E2E" stroke-width="2.4" stroke-linecap="round"><path d="M8 20c-2-3 2-5 0-8M13 20c-2-3 2-5 0-8M18 20c-2-3 2-5 0-8" transform="translate(-2 0)"/></svg>Warm turon</span>
         <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="#4B2E24" stroke-width="2" stroke-linecap="round"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/></svg>Cold ice cream</span>
@@ -438,7 +456,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
         <a class="btn btn-primary" href="#builder">Build Your Saba-Zero</a>
         <a class="btn" href="#menu">See the Menu</a>
       </div>
-      <p class="where"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF4DC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 0 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>On campus at Br. Donato Hall, La Salle College Antipolo</span></p>
+      <p class="where"><svg viewBox="0 0 24 24" fill="none" stroke="#FFF4DC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 0 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Pick-up on campus at the SHS Building &ndash; Student Lounge, La Salle College Antipolo</span></p>
     </div>
 
     <div class="hero-art" id="heroArt" data-fallback>
@@ -451,7 +469,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
         <path class="spark s2" d="M78 40 L82 56 L98 60 L82 64 L78 80 L74 64 L58 60 L74 56 Z"/>
         <path class="spark s3" d="M70 4 L73 14 L83 17 L73 20 L70 30 L67 20 L57 17 L67 14 Z"/>
       </svg>
-      <div class="sticker" aria-label="Price"><b>&#8369;<span data-price>100</span></b><span>per <span data-pieces>4</span> pieces</span></div>
+      <div class="sticker" aria-label="Price"><b>&#8369;<span data-price>89</span></b><span>per <span data-pieces>4</span> pieces</span></div>
     </div>
   </div>
 </section>
@@ -557,7 +575,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
     <div class="sec-head reveal">
       <span class="eyebrow">The menu</span>
       <h2 id="menu-h">Warm turon. Cold ice cream. One box.</h2>
-      <p class="lede">Pick a turon, a scoop, and a drizzle. Crispy, creamy, and made fresh on campus.</p>
+      <p class="lede">Mix any four turon flavors, add a drizzle and a topping, and we put a scoop of vanilla ice cream on top.</p>
     </div>
 
     <div class="menu-grid">
@@ -567,17 +585,25 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
         <ul class="flavors" id="listTuron"></ul>
       </article>
       <article class="card menu-card reveal" style="--i:1">
-        <svg class="m-ico" preserveAspectRatio="xMinYMid meet" viewBox="0 0 48 48" aria-hidden="true"><path d="M15 25h18l-9 20z" fill="#D9953F" stroke="#4B2E24" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="18" r="11" fill="#FBE9B7" stroke="#4B2E24" stroke-width="2"/><path d="M17 15c2-3 5-4 8-3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
-        <h3>Ice cream</h3><div class="count" id="iceCount"></div>
-        <ul class="flavors" id="listIce"></ul>
+        <svg class="m-ico" preserveAspectRatio="xMinYMid meet" viewBox="0 0 48 48" aria-hidden="true"><path d="M19 5h10v7l5 5v24a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3V17l5-5z" fill="#4B2E24" stroke="#4B2E24" stroke-width="2" stroke-linejoin="round"/><rect x="17" y="23" width="14" height="13" rx="2" fill="#F4C542"/><path d="M20 28l2.5 4 2-4 2.5 4" stroke="#4B2E24" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Drizzle</h3><div class="count" id="drizzleCount"></div>
+        <ul class="flavors" id="listDrizzle"></ul>
       </article>
       <article class="card menu-card reveal" style="--i:2">
-        <svg class="m-ico" preserveAspectRatio="xMinYMid meet" viewBox="0 0 48 48" aria-hidden="true"><path d="M19 5h10v7l5 5v24a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3V17l5-5z" fill="#4B2E24" stroke="#4B2E24" stroke-width="2" stroke-linejoin="round"/><rect x="17" y="23" width="14" height="13" rx="2" fill="#F4C542"/><path d="M20 28l2.5 4 2-4 2.5 4" stroke="#4B2E24" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Sauce drizzle</h3><div class="count" id="sauceCount"></div>
-        <ul class="flavors" id="listSauce"></ul>
+        <svg class="m-ico" preserveAspectRatio="xMinYMid meet" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="26" r="13" fill="#FBE9B7" stroke="#4B2E24" stroke-width="2"/><rect x="14" y="18" width="7" height="7" rx="2.5" fill="#fff" stroke="#4B2E24" stroke-width="1.5"/><rect x="26" y="15" width="7" height="7" rx="2.5" fill="#fff" stroke="#4B2E24" stroke-width="1.5"/><path d="M20 30l4 2-2 4zM30 28l4 1-2 4z" fill="#4B2E24"/></svg>
+        <h3>Topping</h3><div class="count" id="toppingCount"></div>
+        <ul class="flavors" id="listTopping"></ul>
       </article>
     </div>
 
+    <div class="card note reveal">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M15 25h18l-9 20z" fill="#D9953F" stroke="#4B2E24" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="18" r="11" fill="#FBE9B7" stroke="#4B2E24" stroke-width="2"/><path d="M17 15c2-3 5-4 8-3" stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
+      <p><strong>Vanilla ice cream is included.</strong> Every box comes with a scoop of premium vanilla ice cream, one drizzle and one topping. We do not serve single-piece orders.</p>
+    </div>
+    <div class="card note reveal">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19" fill="#F4C542" stroke="#4B2E24" stroke-width="2"/><path d="M24 14v20M14 24h20" stroke="#4B2E24" stroke-width="3.5" stroke-linecap="round"/></svg>
+      <p><strong>Want extra flavor?</strong> Add an extra drizzle for +&#8369;<span data-xd>10</span> each (Chocolate or Biscoff) or an extra topping for +&#8369;<span data-xt>5</span> each.</p>
+    </div>
     <div class="card note reveal">
       <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 18l18-8 18 8v20l-18 8-18-8z" fill="#C98A3B" stroke="#4B2E24" stroke-width="2" stroke-linejoin="round"/><path d="M6 18l18 8 18-8M24 26v20" stroke="#4B2E24" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
       <p><strong>Made to go.</strong> Every order comes in a custom disposable food box with a disposable utensil, so it is easy to eat on the move between classes.</p>
@@ -591,7 +617,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
     <!-- BUILDER -->
     <div class="builder reveal" id="builder" role="group" aria-labelledby="builder-h">
       <div class="b-stage">
-        <svg id="boxSvg" viewBox="0 0 360 300" role="img" aria-label="Preview of your Saba-Zero box. It updates when you change the choices." data-ice="vanilla">
+        <svg id="boxSvg" viewBox="0 0 360 300" role="img" aria-label="Preview of your Saba-Zero box. It updates when you change the choices." data-top="mm">
           <defs>
             <g id="roll">
               <rect width="118" height="34" rx="17" style="fill:var(--b-turon)" stroke="#4B2E24" stroke-opacity=".4" stroke-width="1.5"/>
@@ -608,24 +634,27 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
           <rect x="38" y="130" width="284" height="48" rx="6" fill="#7A4220" stroke="#4B2E24" stroke-width="2"/>
           <!-- steam (warm side) -->
           <g class="b-steam"><path d="M88 112 C 80 100, 96 92, 88 78"/><path d="M270 112 C 262 100, 278 92, 270 78"/></g>
-          <!-- turon rolls -->
-          <use href="#roll" transform="translate(52 116) rotate(-3)"/>
-          <use href="#roll" transform="translate(190 114) rotate(3)"/>
-          <use href="#roll" transform="translate(64 142) rotate(2)"/>
-          <use href="#roll" transform="translate(186 142) rotate(-2)"/>
+          <!-- four turon pieces, each with its own flavor -->
+          <use data-roll="1" href="#roll" transform="translate(52 116) rotate(-3)"/>
+          <use data-roll="2" href="#roll" transform="translate(190 114) rotate(3)"/>
+          <use data-roll="3" href="#roll" transform="translate(64 142) rotate(2)"/>
+          <use data-roll="4" href="#roll" transform="translate(186 142) rotate(-2)"/>
           <!-- box front -->
           <path d="M34 172 H326 L318 264 Q317 272 309 272 H51 Q43 272 42 264 Z" fill="#A65E2E" stroke="#4B2E24" stroke-width="2.5" stroke-linejoin="round"/>
           <path d="M34 172 H326 V184 H34Z" fill="#C07A47" stroke="#4B2E24" stroke-width="2.5" stroke-linejoin="round"/>
           <text x="180" y="230" text-anchor="middle" font-family="Fredoka, 'Trebuchet MS', sans-serif" font-weight="700" font-size="24" fill="#FFFFFF">Turon-Da-Go</text>
           <text x="180" y="252" text-anchor="middle" font-family="Fredoka, 'Trebuchet MS', sans-serif" font-weight="500" font-size="13" letter-spacing="3" fill="#FFF4DC">SABA-ZERO</text>
-          <!-- scoop (cold side) -->
+          <!-- vanilla scoop (cold side) -->
           <g transform="translate(180 104)">
-            <path d="M-40 6 Q-37 28 -24 24 Q-17 38 -7 26 Q3 40 12 26 Q24 35 30 22 Q42 24 40 6 Z" style="fill:var(--b-ice)" stroke="#4B2E24" stroke-width="2.5" stroke-linejoin="round"/>
-            <circle r="36" cy="-10" style="fill:var(--b-ice)" stroke="#4B2E24" stroke-width="2.5"/>
+            <path d="M-40 6 Q-37 28 -24 24 Q-17 38 -7 26 Q3 40 12 26 Q24 35 30 22 Q42 24 40 6 Z" fill="#FBE9B7" stroke="#4B2E24" stroke-width="2.5" stroke-linejoin="round"/>
+            <circle r="36" cy="-10" fill="#FBE9B7" stroke="#4B2E24" stroke-width="2.5"/>
             <path d="M-24 -30 Q-17 -40 -6 -42" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".45"/>
-            <g class="cc" fill="#3A2A24"><circle cx="-18" cy="-8" r="3"/><circle cx="12" cy="-28" r="2.8"/><circle cx="22" cy="2" r="3.2"/><circle cx="-4" cy="12" r="2.8"/><circle cx="-26" cy="10" r="2.4"/><circle cx="4" cy="-10" r="2.2"/></g>
             <path d="M-27 -12 Q-19 4 -11 -10 T5 -10 T21 -10 T29 -12" fill="none" stroke="#4B2E24" stroke-opacity=".25" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M-27 -12 Q-19 4 -11 -10 T5 -10 T21 -10 T29 -12" fill="none" style="stroke:var(--b-sauce)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- toppings: marshmallows / chocolate chips / crushed hany -->
+            <g class="top top-mm" fill="#FFFFFF" stroke="#4B2E24" stroke-opacity=".4" stroke-width="1"><rect x="-22" y="-32" width="9" height="9" rx="3"/><rect x="6" y="-38" width="9" height="9" rx="3"/><rect x="20" y="-22" width="9" height="9" rx="3"/><rect x="-32" y="-18" width="9" height="9" rx="3"/><rect x="-6" y="-24" width="9" height="9" rx="3"/><rect x="-14" y="6" width="9" height="9" rx="3"/><rect x="14" y="4" width="9" height="9" rx="3"/></g>
+            <g class="top top-cc" fill="#4B2E24"><path d="M-22 -32 l8 0 l-4 8z"/><path d="M6 -38 l8 0 l-4 8z"/><path d="M20 -22 l8 0 l-4 8z"/><path d="M-32 -18 l8 0 l-4 8z"/><path d="M-6 -24 l8 0 l-4 8z"/><path d="M-14 6 l8 0 l-4 8z"/><path d="M14 4 l8 0 l-4 8z"/></g>
+            <g class="top top-hn" fill="#C98A3B" stroke="#4B2E24" stroke-opacity=".5" stroke-width="1"><path d="M-24 -32 l9 2 l-2 6 l-8 -2z"/><path d="M5 -38 l8 -1 l1 7 l-8 1z"/><path d="M19 -22 l9 1 l-2 7 l-8 -2z"/><path d="M-33 -17 l8 -1 l1 7 l-8 1z"/><path d="M-7 -25 l8 1 l-1 7 l-8 -1z"/><path d="M-14 6 l9 0 l-1 7 l-8 -1z"/><path d="M14 4 l8 1 l-2 6 l-7 -2z"/></g>
           </g>
           <path class="spark" d="M244 46 L248 58 L260 62 L248 66 L244 78 L240 66 L228 62 L240 58Z"/>
           <path class="spark s2" d="M122 40 L125 48 L133 51 L125 54 L122 62 L119 54 L111 51 L119 48Z"/>
@@ -634,12 +663,23 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
       <div class="b-controls">
         <span class="eyebrow">Build your own</span>
         <h3 id="builder-h">Build Your Saba-Zero</h3>
-        <p class="sub">Build it your way: pick a turon, a scoop, and a drizzle. One turon flavor per box.</p>
-        <!-- ASSUMPTION: all 4 pieces in a box share one turon flavor. Not stated by the client, confirm. -->
-        <fieldset class="group"><legend>1. Turon flavor</legend><div class="chips" id="chipsTuron"></div></fieldset>
-        <fieldset class="group"><legend>2. Ice cream scoop</legend><div class="chips" id="chipsIce"></div></fieldset>
-        <fieldset class="group"><legend>3. Sauce drizzle</legend><div class="chips" id="chipsSauce"></div></fieldset>
+        <p class="sub">Pick a flavor for each of the 4 pieces, then a drizzle and a topping. Vanilla ice cream is included.</p>
+        <fieldset class="group"><legend>1. Turon flavors</legend>
+          <div class="chips-lab">All four the same</div>
+          <div class="chips" id="chipsAll"></div>
+          <div class="chips-lab" style="margin-top:12px">Or mix them, piece by piece</div>
+          <div class="pieces" id="pieceSelects"></div>
+        </fieldset>
+        <fieldset class="group"><legend>2. Drizzle</legend><div class="chips" id="chipsDrizzle"></div></fieldset>
+        <fieldset class="group"><legend>3. Topping (one is free)</legend><div class="chips" id="chipsTopping"></div></fieldset>
+        <fieldset class="group"><legend>4. Extras (optional)</legend>
+          <div class="chips-lab">Extra drizzle <span data-xd-label></span></div>
+          <div class="chips" id="chipsXd"></div>
+          <div class="chips-lab" style="margin-top:10px">Extra topping <span data-xt-label></span></div>
+          <div class="chips" id="chipsXt"></div>
+        </fieldset>
         <p class="b-summary" id="bSummary" aria-live="polite"></p>
+        <p class="b-total"><span>Estimated total</span><b id="bTotal">&#8369;89</b></p>
         <a class="btn btn-primary" href="#order" id="bOrder">Order this Saba-Zero</a>
       </div>
     </div>
@@ -647,35 +687,38 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
 </section>
 
 <!-- =========================== D. PRICING =========================== -->
-<!-- NOTE: the price is TENTATIVE. Final pricing is to be confirmed after the market survey. It lives in ONE constant (PRICE) in the script below. -->
+<!-- NOTE: prices live in constants (PRICE, BISCOFF_UPCHARGE, EXTRA_DRIZZLE, EXTRA_TOPPING) in the script below. They follow the client's Google Form. -->
 <section class="section caramel-bg" id="pricing" aria-labelledby="pricing-h">
   <div class="wrap price-grid">
     <div class="reveal">
       <span class="eyebrow">Pricing</span>
       <h2 id="pricing-h">One box. One simple price.</h2>
       <p class="lede" style="margin-top:.9rem">Everything you need for a proper break, ready to carry.</p>
-      <ul class="inc" aria-label="What is in one order">
-        <li><span class="n" data-pieces>4</span> mini-turon bites, warm and crispy</li>
-        <li><span class="n">1</span> scoop of ice cream</li>
-        <li><span class="n">1</span> sauce drizzle</li>
+      <ul class="inc" aria-label="What is in one box">
+        <li><span class="n" data-pieces>4</span> mini-turon pieces, any flavor mix</li>
+        <li><span class="n">1</span> scoop of premium vanilla ice cream</li>
+        <li><span class="n">1</span> drizzle: Chocolate, or Biscoff (+&#8369;<span data-biscoff>10</span>)</li>
+        <li><span class="n">1</span> free topping</li>
         <li><span class="n">+</span> custom box and disposable utensil</li>
       </ul>
+      <p class="extras-line">Extras: drizzle +&#8369;<span data-xd>10</span> each, topping +&#8369;<span data-xt>5</span> each.</p>
       <div class="pay"><b>Pay with</b>
         <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="#4B2E24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.8"/></svg>Cash</span>
         <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="#4B2E24" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></svg>GCash</span>
       </div>
-      <p class="gcash-line">GCash number: <b data-gcash>0917 169 9187</b></p>
+      <p class="gcash-line">GCash number: <b data-gcash>0917 169 9187</b> <span data-gcashname>A. Castellano</span></p>
     </div>
     <div class="price-card reveal" style="--i:1">
       <div class="bites" aria-hidden="true">
         <svg viewBox="0 0 44 30"><rect x="2" y="6" width="34" height="18" rx="9" fill="#C98A3B" stroke="#4B2E24" stroke-width="2"/><ellipse cx="32" cy="15" rx="4" ry="8" fill="#F4C542" stroke="#4B2E24" stroke-width="2"/></svg>
-        <svg viewBox="0 0 44 30"><rect x="2" y="6" width="34" height="18" rx="9" fill="#C98A3B" stroke="#4B2E24" stroke-width="2"/><ellipse cx="32" cy="15" rx="4" ry="8" fill="#F4C542" stroke="#4B2E24" stroke-width="2"/></svg>
-        <svg viewBox="0 0 44 30"><rect x="2" y="6" width="34" height="18" rx="9" fill="#C98A3B" stroke="#4B2E24" stroke-width="2"/><ellipse cx="32" cy="15" rx="4" ry="8" fill="#F4C542" stroke="#4B2E24" stroke-width="2"/></svg>
-        <svg viewBox="0 0 44 30"><rect x="2" y="6" width="34" height="18" rx="9" fill="#C98A3B" stroke="#4B2E24" stroke-width="2"/><ellipse cx="32" cy="15" rx="4" ry="8" fill="#F4C542" stroke="#4B2E24" stroke-width="2"/></svg>
+        <svg viewBox="0 0 44 30"><rect x="2" y="6" width="34" height="18" rx="9" fill="#D9A441" stroke="#4B2E24" stroke-width="2"/><ellipse cx="32" cy="15" rx="4" ry="8" fill="#F2A93B" stroke="#4B2E24" stroke-width="2"/></svg>
+        <svg viewBox="0 0 44 30"><rect x="2" y="6" width="34" height="18" rx="9" fill="#A8708F" stroke="#4B2E24" stroke-width="2"/><ellipse cx="32" cy="15" rx="4" ry="8" fill="#8E5BB5" stroke="#4B2E24" stroke-width="2"/></svg>
+        <svg viewBox="0 0 44 30"><rect x="2" y="6" width="34" height="18" rx="9" fill="#7A4326" stroke="#4B2E24" stroke-width="2"/><ellipse cx="32" cy="15" rx="4" ry="8" fill="#4B2E24" stroke="#4B2E24" stroke-width="2"/></svg>
       </div>
-      <div class="big"><small>&#8369;</small><span data-price>100</span></div>
-      <div class="per">per order of <span data-pieces>4</span> pieces</div>
+      <div class="big"><small>&#8369;</small><span data-price>89</span></div>
+      <div class="per">per box of <span data-pieces>4</span> pieces</div>
       <a class="btn btn-primary" href="#order" data-order-link>Order Saba-Zero</a>
+      <p class="fine" style="margin-bottom:0">We do not serve single-piece orders.</p>
     </div>
   </div>
 </section>
@@ -699,9 +742,9 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
       <h2 id="order-h">Break time just got an upgrade.</h2>
       <p class="lede" style="margin-top:.9rem">Pre-order so your Saba-Zero is ready when the bell rings. No account, no waiting in line.</p>
       <ol class="how" style="list-style:none">
-        <li><span class="n" aria-hidden="true">1</span><span>Fill in the form and tap <b>Create my message</b>.</span></li>
-        <li><span class="n" aria-hidden="true">2</span><span>Copy the message and send it to us on Instagram or TikTok.</span></li>
-        <li><span class="n" aria-hidden="true">3</span><span>We confirm your order, and you pay with Cash or GCash on campus.</span></li>
+        <li><span class="n" aria-hidden="true">1</span><span><a href="#builder"><b>Build your box</b></a> above: four turon pieces, a drizzle and a topping.</span></li>
+        <li><span class="n" aria-hidden="true">2</span><span>Fill in your details here, choose pick-up or campus delivery, and tap <b>Create my order</b>.</span></li>
+        <li><span class="n" aria-hidden="true">3</span><span>We confirm using the contact method you choose. You pay with Cash or GCash.</span></li>
       </ol>
       <div class="form-link" id="externalFormBox" hidden>
         <a class="btn btn-yellow" href="#" id="externalFormBtn" target="_blank" rel="noopener noreferrer">Open the order form</a>
@@ -717,7 +760,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
 
         <div class="fields">
           <div class="field">
-            <label for="fName">Your name</label>
+            <label for="fName">Name or nickname</label>
             <input class="input" id="fName" name="name" type="text" autocomplete="name" maxlength="60">
             <div class="err" id="eName" role="alert"></div>
           </div>
@@ -730,53 +773,67 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
           </div>
 
           <div class="field" data-order-only>
-            <label for="fTuron">Turon flavor</label>
-            <select class="input" id="fTuron" name="turon"></select>
+            <span class="lab" id="contactLab">How can we contact you?</span>
+            <div class="mode" role="radiogroup" aria-labelledby="contactLab" style="margin:0">
+              <label><input type="radio" name="contact" value="Instagram"><span>Instagram</span></label>
+              <label><input type="radio" name="contact" value="Facebook/Messenger"><span>Facebook/Messenger</span></label>
+            </div>
+            <div class="err" id="eContact" role="alert"></div>
           </div>
           <div class="field" data-order-only>
-            <label for="fIce">Ice cream flavor</label>
-            <select class="input" id="fIce" name="ice"></select>
+            <label for="fSocial">Your Instagram or Facebook account</label>
+            <input class="input" id="fSocial" name="social" type="text" maxlength="80" placeholder="Optional, for order updates">
+          </div>
+
+          <div class="field full box-sum" data-order-only id="boxSum" aria-live="polite">
+            <h4>Your box</h4>
+            <ul id="boxSumList"></ul>
+            <a href="#builder">Change your box</a>
+          </div>
+
+          <div class="field" data-order-only>
+            <span class="lab" id="modLab">Pick-up or delivery?</span>
+            <div class="mode" role="radiogroup" aria-labelledby="modLab" style="margin:0">
+              <label><input type="radio" name="modality" value="Pick-Up"><span>Pick-Up</span></label>
+              <label><input type="radio" name="modality" value="Delivery"><span>Delivery</span></label>
+            </div>
+            <div class="hint" id="modHint"></div>
+            <div class="err" id="eModality" role="alert"></div>
           </div>
           <div class="field" data-order-only>
-            <label for="fSauce">Sauce drizzle</label>
-            <select class="input" id="fSauce" name="sauce"></select>
-          </div>
-          <div class="field" data-order-only>
-            <label for="fQty">Number of orders</label>
-            <input class="input" id="fQty" name="qty" type="number" min="1" max="20" step="1" value="1" inputmode="numeric">
-            <div class="hint"><span data-pieces>4</span> pieces per order</div>
-            <div class="err" id="eQty" role="alert"></div>
-          </div>
-          <div class="field" data-order-only>
-            <span class="lab" id="payLab">Payment method</span>
+            <span class="lab" id="payLab">Payment</span>
             <div class="mode" role="radiogroup" aria-labelledby="payLab" style="margin:0">
               <label><input type="radio" name="pay" value="Cash"><span>Cash</span></label>
               <label><input type="radio" name="pay" value="GCash"><span>GCash</span></label>
             </div>
             <div class="err" id="ePay" role="alert"></div>
           </div>
-          <div class="field" data-order-only>
-            <label for="fBreak">Preferred break time</label>
-            <input class="input" id="fBreak" name="breakTime" type="text" maxlength="60" placeholder="e.g. Morning break">
+          <div class="field full" id="locField" hidden>
+            <label for="fLoc">Delivery location</label>
+            <input class="input" id="fLoc" name="location" type="text" maxlength="100" placeholder="Room or building area on campus">
+            <div class="err" id="eLoc" role="alert"></div>
+          </div>
+          <div class="field full" id="payBox" data-order-only hidden>
+            <p class="hint-box" id="payHint"></p>
           </div>
 
-          <div class="field full">
-            <label for="fNotes" id="notesLab">Notes (optional)</label>
+          <div class="field full" data-inquiry-only hidden>
+            <label for="fNotes">Your question</label>
             <textarea class="input" id="fNotes" name="notes" maxlength="500"></textarea>
             <div class="err" id="eNotes" role="alert"></div>
           </div>
         </div>
 
         <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="fWebsite" name="website" tabindex="-1" autocomplete="off"></label></div>
-        <div class="total" id="totalBox"><span>Estimated total</span><b id="totalVal">&#8369;100</b></div>
+        <div class="total" id="totalBox"><span>Estimated total</span><b id="totalVal">&#8369;89</b></div>
         <p class="form-msg" id="formMsg" role="alert"></p>
-        <button class="btn btn-primary" type="button" id="submitBtn" style="margin-top:14px;width:100%">Create my message</button>
+        <button class="btn btn-primary" type="button" id="submitBtn" style="margin-top:14px;width:100%">Create my order</button>
       </form>
 
       <div class="result" id="result" hidden>
         <h3 id="resultTitle">Your message is ready</h3>
         <p class="send-status" id="sendStatus" role="status" hidden></p>
-        <p id="resultHelp">Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus.</p>
+        <p id="resultHelp">Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash.</p>
         <label class="sr-only" for="msgOut">Your message</label>
         <textarea class="input" id="msgOut" readonly></textarea>
         <div class="result-btns">
@@ -784,7 +841,7 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
           <a class="btn btn-small btn-yellow" href="https://www.instagram.com/turondagowch/" target="_blank" rel="noopener noreferrer" data-social="instagram">Open Instagram</a>
           <a class="btn btn-small" href="https://www.tiktok.com/@turondagoat" target="_blank" rel="noopener noreferrer" data-social="tiktok">Open TikTok</a>
         </div>
-        <p class="gcash-note" id="gcashNote" hidden>Paying with GCash? Our GCash number is <b data-gcash>0917 169 9187</b>.</p>
+        <p class="gcash-note" id="gcashNote" hidden></p>
         <p class="copy-status" id="copyStatus" role="status">If the copy button does nothing, select the text in the box and copy it.</p>
       </div>
     </div>
@@ -835,11 +892,11 @@ a.c-card:hover{transform:translateY(-5px) rotate(-.8deg);box-shadow:0 11px 0 var
       <!-- TODO: Facebook Messenger link (mentioned in the study but no link was given). Add a card here when the group provides it. -->
       <div class="c-card reveal" style="--i:2">
         <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 0 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div>
-        <h3>Where</h3><p>Br. Donato Hall, La Salle College Antipolo, Town &amp; Country Heights Subdivision, Antipolo City, Rizal</p>
+        <h3>Where</h3><p>SHS Building &ndash; Student Lounge, Lower Ground Floor, La Salle College Antipolo, Town &amp; Country Heights Subdivision, Antipolo City, Rizal</p>
       </div>
       <div class="c-card reveal" style="--i:3">
         <div class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></div>
-        <h3>How to order</h3><p>Pre-order on Instagram or TikTok, then pay with Cash or GCash (<span data-gcash>0917 169 9187</span>).</p>
+        <h3>How to order</h3><p>Build your box on this site, or message us on Instagram or TikTok. Pay with Cash or GCash (<span data-gcash>0917 169 9187</span>).</p>
       </div>
     </div>
   </div>
@@ -898,40 +955,54 @@ const IMAGES = {
 <script>
 /* ======================================================================
    SITE CONFIG  (edit data here, not in the HTML)
+   Prices, flavors and form fields follow the client's Google Order Form.
    ====================================================================== */
 
-// TODO: price is TENTATIVE. Final pricing is to be confirmed after the market survey. Change it here only.
-const PRICE = 100;            // peso price of ONE order
-const PIECES_PER_ORDER = 4;   // mini-turon bites in ONE order
-const MAX_ORDERS = 20;
+// Prices in pesos.
+const PRICE = 89;              // ONE box of 4 pieces (vanilla ice cream, one drizzle and one topping included)
+const PIECES_PER_ORDER = 4;    // mini-turon pieces in ONE box
+const BISCOFF_UPCHARGE = 10;   // choosing Biscoff as the included drizzle
+const EXTRA_DRIZZLE = 10;      // each extra drizzle
+const EXTRA_TOPPING = 5;       // each extra topping
 
-// GCash number shown on the pricing, contact, FAQ and order sections. Digits only; it is formatted automatically.
+// GCash details shown on the pricing, contact, FAQ and order sections. The number is digits only (formatted automatically).
 const GCASH_NUMBER = "09171699187";
+const GCASH_NAME = "A. Castellano";
+
+// Pick-up spot shown on the page.
+const PICKUP_SPOT = "SHS Building - Student Lounge, Lower Ground Floor";
 
 // Optional upgrade: paste a Google Form link here and every "Order" button opens it in a new tab.
-// Leave "" to use the built-in message builder (works with zero setup).
+// Leave "" to use this site's own order form (recommended: it posts the order into your Sheet).
 const ORDER_FORM_URL = "";
 
-// LIVE ORDERS: when this is filled in, "Create my message" ALSO posts the order in the background to a Google Form,
-// and every order lands as a new row in the form's Google Sheet. The Instagram/TikTok message stays as a backup.
-// Leave formResponseUrl "" to turn it off. Keep ORDER_FORM_URL empty so visitors use THIS site's form.
-//   formResponseUrl: the form's address ending in /formResponse
-//   fields: each question's id from the form, like "entry.1234567890". Leave a field "" to skip it.
+// LIVE ORDERS: "Create my order" posts the order in the background to this Google Form, and each order becomes a row in
+// the form's Google Sheet. Leave formResponseUrl "" to turn it off.
+// IMPORTANT: the form must NOT have a file-upload question, because that forces a Google sign-in and blocks the post.
+// The form has several pages, so Google drops a post unless it lists the pages visited (pageHistory, built below).
 const ORDER_SUBMIT = {
-  formResponseUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc6tJQjSLFXXbbptNw26Bo_8SbDthQwDjnElqTVUmxH8aTYag/formResponse",
+  formResponseUrl: "https://docs.google.com/forms/d/e/1FAIpQLSeF5hbe4Er071cvLcbscFbWkgCOY3X7DL6DK95sun4PRVQhQg/formResponse",
   fields: {
-    type: "entry.2063833007",       // "Order" or "Inquiry"
-    name: "entry.548182127",
-    group: "entry.746743575",       // grade and section
-    turon: "entry.651706916",
-    ice: "entry.1674768749",
-    sauce: "entry.327890033",
-    orders: "entry.758694737",      // number of orders
-    payment: "entry.1350477244",    // Cash or GCash
-    breakTime: "entry.81030323",
-    notes: "entry.1740605991",      // notes, or the question in inquiry mode
-    total: "entry.45498111"         // estimated total, e.g. ₱300
-  }
+    name: "entry.1641324145",
+    group: "entry.1559450728",        // grade and section
+    contact: "entry.1060320043",      // Instagram or Facebook/Messenger
+    social: "entry.272450052",        // optional account name
+    piece1: "entry.817996862",
+    piece2: "entry.83763857",
+    piece3: "entry.45456791",
+    piece4: "entry.672996371",
+    drizzle: "entry.90331123",
+    topping: "entry.790695575",
+    extraDrizzles: "entry.1017499024",   // tick boxes, one value per extra
+    extraToppings: "entry.937066964",    // tick boxes, one value per extra
+    modality: "entry.822550709",         // Pick-Up or Delivery
+    location: "entry.299870308",         // delivery location
+    payment: "entry.1331241660"          // Cash or GCash
+  },
+  // Page numbers in the Google Form (0 = first page):
+  // 0 intro, 1 profile, 2 turon, 3 drizzle, 4 toppings, 5 add-ons, 6 pick-up or delivery,
+  // 7 delivery location (Delivery only), 8 payment, 9 GCash page (GCash only)
+  pages: { base: [0, 1, 2, 3, 4, 5, 6], delivery: 7, payment: 8, gcash: 9 }
 };
 
 const SOCIAL = {
@@ -940,23 +1011,25 @@ const SOCIAL = {
   // TODO: Facebook Messenger link goes here when provided. Not added on purpose.
 };
 
-// Flavors. Add a new one by adding a line to the right list (ice cream list may grow, the list may grow).
-// body = turon wrapper color, fill = turon filling color, color = dot/scoop/sauce color, accent = marks a dark swatch
+// Menu. Each list can grow: add a line (copy one, change id, name, color).
+// "form" is the exact option text in the Google Form (it must match, or Google files the answer under "Other").
+// body = turon wrapper color, fill = turon filling color, color = dot color.
 const FLAVORS = {
   turon: [
-    { id: "plain",     name: "Plain",     body: "#C98A3B", fill: "#F4C542", color: "#F4C542" },
-    { id: "chocolate", name: "Chocolate", body: "#7A4326", fill: "#4B2E24", color: "#4B2E24" },
-    { id: "ube",       name: "Ube",       body: "#A8708F", fill: "#8E5BB5", color: "#7A4FA0" },
-    { id: "cheese",    name: "Cheese",    body: "#D9A441", fill: "#FFE08A", color: "#FFE08A" }
+    { id: "plain",     name: "Plain",        body: "#C98A3B", fill: "#F4C542", color: "#F4C542" },
+    { id: "cheese",    name: "Cheese",       body: "#D9A441", fill: "#F2A93B", color: "#F2A93B" },
+    { id: "milky",     name: "Milky Cheese", body: "#D9B25E", fill: "#FFF1C2", color: "#FFF1C2" },
+    { id: "ube",       name: "Ube",          body: "#A8708F", fill: "#8E5BB5", color: "#7A4FA0" },
+    { id: "chocolate", name: "Chocolate",    body: "#7A4326", fill: "#4B2E24", color: "#4B2E24" }
   ],
-  ice: [
-    { id: "vanilla",   name: "Vanilla",   color: "#FBE9B7" },
-    { id: "chocolate", name: "Chocolate", color: "#6A3B2B" }
+  drizzle: [
+    { id: "chocolate", name: "Chocolate", color: "#3A1F15", form: "Chocolate",             up: 0 },
+    { id: "biscoff",   name: "Biscoff",   color: "#B8692E", form: "Biscoff ( +₱10.00 )", up: BISCOFF_UPCHARGE }
   ],
-  sauce: [
-    { id: "chocolate", name: "Chocolate", color: "#3A1F15" },
-    { id: "vanilla",   name: "Vanilla",   color: "#FFFDF3" },
-    { id: "caramel",   name: "Caramel",   color: "#D98324" }
+  topping: [
+    { id: "marshmallow", name: "Mini Marshmallows", color: "#FFFFFF", key: "mm" },
+    { id: "chips",       name: "Chocolate Chips",   color: "#4B2E24", key: "cc" },
+    { id: "hany",        name: "Crushed Hany",      color: "#C98A3B", key: "hn" }
   ]
 };
 
@@ -984,15 +1057,15 @@ const GALLERY = [
   { src: "",                  alt: "",                                                              label: "",                 ph: "Behind the scenes" }
 ];
 
-// FAQ. {price} and {pieces} are filled in from the constants above.
+// FAQ. {price}, {pieces}, {gcash}, {gcashname}, {biscoff}, {xd}, {xt}, {pickup} are filled in from the constants above.
 const FAQ = [
-  { q: "What is Saba-Zero?",            a: "Warm, crispy mini-turon bites served with ice cream and sauce drizzles, a hot-and-cold twist on a classic Filipino merienda." },
-  { q: "What flavors can I choose?",    a: "Turon: Plain, Chocolate, Ube, Cheese. Ice cream: Vanilla, Chocolate. Sauce: Chocolate, Vanilla, Caramel." },
-  { q: "How much is it?",               a: "₱{price} per order of {pieces} pieces." },   // tentative, see PRICE note above
-  { q: "Where can I buy it?",           a: "At our booth on campus at Br. Donato Hall, La Salle College Antipolo." },
-  { q: "Can I pre-order?",              a: "Yes. Send us your order on Instagram or TikTok ahead of time so we can have it ready during break." },
-  { q: "How do I pay?",                 a: "Cash or GCash. Our GCash number is {gcash}." },
-  { q: "Do you deliver?",               a: "We hand your order over on campus. We do not offer off-campus delivery." },
+  { q: "What is Saba-Zero?",            a: "Warm, crispy mini-turon bites served with vanilla ice cream and a sauce drizzle, a hot-and-cold twist on a classic Filipino merienda." },
+  { q: "What can I choose?",            a: "Four mini-turon pieces in any mix of Plain, Cheese, Milky Cheese, Ube and Chocolate. Every box comes with vanilla ice cream, one drizzle (Chocolate, or Biscoff for +₱{biscoff}) and one free topping (Mini Marshmallows, Chocolate Chips or Crushed Hany)." },
+  { q: "How much is it?",               a: "₱{price} per box of {pieces} pieces. Extra drizzles are +₱{xd} each and extra toppings are +₱{xt} each. We do not serve single-piece orders." },
+  { q: "Where can I pick it up?",       a: "At our booth at the {pickup}, during authorized school break windows." },
+  { q: "Can I pre-order?",              a: "Yes. Build your box on this page and send your order, or message us on Instagram or TikTok ahead of time so we can have it ready during break. We confirm using the contact method you choose." },
+  { q: "Do you deliver?",               a: "Yes, within campus. Choose Delivery when you order and tell us the room or building area. We do not offer off-campus delivery." },
+  { q: "How do I pay?",                 a: "Cash (pay when you pick up or when we deliver) or GCash ({gcash}, {gcashname}). If you pay with GCash, send us a screenshot of your receipt on Instagram or Facebook/Messenger so we can confirm your order." },
   { q: "When are you open?",            a: "During authorized school break windows set by the LSCA administration." },   // no exact times on purpose
   { q: "Is it safe and hygienic?",      a: "We follow strict food safety and hygiene practices and prepare each order fresh." },
   // TODO / ASSUMPTION: allergen info was not provided. Confirm with the group before keeping this text.
@@ -1024,7 +1097,11 @@ const FAQ = [
   function find(group, id) { return FLAVORS[group].filter(function (f) { return f.id === id; })[0] || FLAVORS[group][0]; }
   function peso(n) { return "₱" + n; }
   function gcashFmt() { var d = String(GCASH_NUMBER).replace(/\D/g, ""); return d.length === 11 ? d.slice(0, 4) + " " + d.slice(4, 7) + " " + d.slice(7) : d; }
-  function fill(str) { return str.replace("{price}", PRICE).replace("{pieces}", PIECES_PER_ORDER).replace("{gcash}", gcashFmt()); }
+  function fill(str) {
+    return str.replace(/\{price\}/g, PRICE).replace(/\{pieces\}/g, PIECES_PER_ORDER).replace(/\{gcash\}/g, gcashFmt())
+      .replace(/\{gcashname\}/g, GCASH_NAME).replace(/\{biscoff\}/g, BISCOFF_UPCHARGE).replace(/\{xd\}/g, EXTRA_DRIZZLE)
+      .replace(/\{xt\}/g, EXTRA_TOPPING).replace(/\{pickup\}/g, PICKUP_SPOT);
+  }
 
   /* ---------- images ---------- */
   function applyImages() {
@@ -1049,8 +1126,13 @@ const FAQ = [
     $$("[data-price]").forEach(function (n) { n.textContent = PRICE; });
     $$("[data-pieces]").forEach(function (n) { n.textContent = PIECES_PER_ORDER; });
     $$("[data-gcash]").forEach(function (n) { n.textContent = gcashFmt(); });
+    $$("[data-gcashname]").forEach(function (n) { n.textContent = "(" + GCASH_NAME + ")"; });
+    $$("[data-biscoff]").forEach(function (n) { n.textContent = BISCOFF_UPCHARGE; });
+    $$("[data-xd]").forEach(function (n) { n.textContent = EXTRA_DRIZZLE; });
+    $$("[data-xt]").forEach(function (n) { n.textContent = EXTRA_TOPPING; });
+    $$("[data-xd-label]").forEach(function (n) { n.textContent = "(+" + peso(EXTRA_DRIZZLE) + " each)"; });
+    $$("[data-xt-label]").forEach(function (n) { n.textContent = "(+" + peso(EXTRA_TOPPING) + " each)"; });
     $$("[data-social]").forEach(function (a) { var s = SOCIAL[a.getAttribute("data-social")]; if (s) a.href = s.url; });
-    $("#fQty").max = MAX_ORDERS;
     if (ORDER_FORM_URL) {
       $$("[data-order-link]").forEach(function (a) { a.href = ORDER_FORM_URL; a.target = "_blank"; a.rel = "noopener noreferrer"; });
       var box = $("#externalFormBox"); box.hidden = false; $("#externalFormBtn").href = ORDER_FORM_URL;
@@ -1059,51 +1141,97 @@ const FAQ = [
 
   /* ---------- menu lists ---------- */
   function renderMenu() {
-    [["turon", "#listTuron", "#turonCount", "flavors"], ["ice", "#listIce", "#iceCount", "flavors"], ["sauce", "#listSauce", "#sauceCount", "sauces"]].forEach(function (g) {
+    [["turon", "#listTuron", "#turonCount", "flavors"], ["drizzle", "#listDrizzle", "#drizzleCount", "drizzles"], ["topping", "#listTopping", "#toppingCount", "toppings"]].forEach(function (g) {
       var ul = $(g[1]); ul.innerHTML = "";
       FLAVORS[g[0]].forEach(function (f) {
-        ul.appendChild(h("li", null, [h("span", { "class": "dot", style: "background:" + f.color, "aria-hidden": "true" }), f.name]));
+        var kids = [h("span", { "class": "dot", style: "background:" + f.color, "aria-hidden": "true" }), f.name];
+        if (f.up) kids.push(h("span", { "class": "up", text: "+" + peso(f.up) }));
+        ul.appendChild(h("li", null, kids));
       });
       $(g[2]).textContent = FLAVORS[g[0]].length + " " + g[3];
     });
+    $("#toppingCount").textContent += ", one is free";
   }
 
-  /* ---------- builder + form selects ---------- */
-  var sel = { turon: FLAVORS.turon[0].id, ice: FLAVORS.ice[0].id, sauce: FLAVORS.sauce[0].id };
-  var selectIds = { turon: "#fTuron", ice: "#fIce", sauce: "#fSauce" };
-  var chipHosts = { turon: "#chipsTuron", ice: "#chipsIce", sauce: "#chipsSauce" };
+  /* ---------- builder (the single place where the box is chosen) ---------- */
+  var ORD = ["1st", "2nd", "3rd", "4th"];
+  var st = { pieces: [], drizzle: FLAVORS.drizzle[0].id, topping: FLAVORS.topping[0].id, xd: [], xt: [] };
+  for (var pi = 0; pi < PIECES_PER_ORDER; pi++) st.pieces.push(FLAVORS.turon[0].id);
 
-  function renderBuilder() {
-    ["turon", "ice", "sauce"].forEach(function (g) {
-      var host = $(chipHosts[g]); host.innerHTML = "";
-      var select = $(selectIds[g]); select.innerHTML = "";
-      FLAVORS[g].forEach(function (f) {
-        var input = h("input", { type: "radio", name: "b-" + g, value: f.id });
-        if (f.id === sel[g]) input.checked = true;
-        input.addEventListener("change", function () { if (input.checked) setSel(g, f.id); });
-        host.appendChild(h("label", { "class": "chip" }, [input, h("span", null, [h("span", { "class": "dot", style: "background:" + f.color, "aria-hidden": "true" }), f.name])]));
-        select.appendChild(h("option", { value: f.id, text: f.name }));
-      });
-      select.value = sel[g];
-      select.addEventListener("change", function () { setSel(g, select.value); });
+  function total() { return PRICE + find("drizzle", st.drizzle).up + st.xd.length * EXTRA_DRIZZLE + st.xt.length * EXTRA_TOPPING; }
+  function piecesSummary() {
+    var parts = [];
+    FLAVORS.turon.forEach(function (f) {
+      var n = st.pieces.filter(function (id) { return id === f.id; }).length;
+      if (n) parts.push(n + " " + f.name);
     });
-    paintBuilder();
+    return parts.join(", ");
   }
-  function setSel(g, id) {
-    sel[g] = id;
-    $$('input[name="b-' + g + '"]').forEach(function (r) { r.checked = (r.value === id); });
-    $(selectIds[g]).value = id;
-    paintBuilder();
+  function extrasList() {
+    return st.xd.map(function (id) { return "Extra " + find("drizzle", id).name + " drizzle"; })
+      .concat(st.xt.map(function (id) { return "Extra " + find("topping", id).name; }));
   }
-  function paintBuilder() {
-    var t = find("turon", sel.turon), i = find("ice", sel.ice), s = find("sauce", sel.sauce);
+  function summaryText() {
+    var d = find("drizzle", st.drizzle), tp = find("topping", st.topping);
+    var s = piecesSummary() + " turon, " + d.name + " drizzle, " + tp.name;
+    var ex = extrasList(); if (ex.length) s += " + " + ex.join(", ");
+    return s;
+  }
+  function toggle(arr, id, on) { var i = arr.indexOf(id); if (on && i < 0) arr.push(id); if (!on && i >= 0) arr.splice(i, 1); }
+  function chip(type, name, value, label, color, extra, onchange) {
+    var input = h("input", { type: type, name: name, value: value });
+    input.addEventListener("change", function () { onchange(input.checked); });
+    var kids = [h("span", { "class": "dot", style: "background:" + color, "aria-hidden": "true" }), label];
+    if (extra) kids.push(h("span", { "class": "chip-up", text: extra }));
+    return h("label", { "class": "chip" }, [input, h("span", null, kids)]);
+  }
+  function renderBuilder() {
+    var host = $("#chipsAll"); host.innerHTML = "";
+    FLAVORS.turon.forEach(function (f) {
+      host.appendChild(chip("radio", "b-all", f.id, f.name, f.color, "", function (on) { if (on) { st.pieces = st.pieces.map(function () { return f.id; }); paint(); } }));
+    });
+    var ps = $("#pieceSelects"); ps.innerHTML = "";
+    st.pieces.forEach(function (_, i) {
+      var sel = h("select", { "class": "input sm", id: "piece" + i });
+      FLAVORS.turon.forEach(function (f) { sel.appendChild(h("option", { value: f.id, text: f.name })); });
+      sel.addEventListener("change", function () { st.pieces[i] = sel.value; paint(); });
+      ps.appendChild(h("label", null, [ORD[i] + " piece", sel]));
+    });
+    host = $("#chipsDrizzle"); host.innerHTML = "";
+    FLAVORS.drizzle.forEach(function (f) { host.appendChild(chip("radio", "b-drizzle", f.id, f.name, f.color, f.up ? "+" + peso(f.up) : "", function (on) { if (on) { st.drizzle = f.id; paint(); } })); });
+    host = $("#chipsTopping"); host.innerHTML = "";
+    FLAVORS.topping.forEach(function (f) { host.appendChild(chip("radio", "b-topping", f.id, f.name, f.color, "", function (on) { if (on) { st.topping = f.id; paint(); } })); });
+    host = $("#chipsXd"); host.innerHTML = "";
+    FLAVORS.drizzle.forEach(function (f) { host.appendChild(chip("checkbox", "b-xd", f.id, f.name, f.color, "", function (on) { toggle(st.xd, f.id, on); paint(); })); });
+    host = $("#chipsXt"); host.innerHTML = "";
+    FLAVORS.topping.forEach(function (f) { host.appendChild(chip("checkbox", "b-xt", f.id, f.name, f.color, "", function (on) { toggle(st.xt, f.id, on); paint(); })); });
+    paint();
+  }
+  function paint() {
     var svg = $("#boxSvg");
-    svg.style.setProperty("--b-turon", t.body);
-    svg.style.setProperty("--b-fill", t.fill);
-    svg.style.setProperty("--b-ice", i.color);
-    svg.style.setProperty("--b-sauce", s.color);
-    svg.setAttribute("data-ice", i.id);
-    $("#bSummary").textContent = t.name + " turon, " + i.name + " scoop, " + s.name + " drizzle";
+    st.pieces.forEach(function (id, i) {
+      var f = find("turon", id), u = $('[data-roll="' + (i + 1) + '"]', svg);
+      if (u) { u.style.setProperty("--b-turon", f.body); u.style.setProperty("--b-fill", f.fill); }
+      var s = $("#piece" + i); if (s) s.value = id;
+    });
+    var same = st.pieces.every(function (id) { return id === st.pieces[0]; });
+    $$('input[name="b-all"]').forEach(function (r) { r.checked = same && r.value === st.pieces[0]; });
+    $$('input[name="b-drizzle"]').forEach(function (r) { r.checked = (r.value === st.drizzle); });
+    $$('input[name="b-topping"]').forEach(function (r) { r.checked = (r.value === st.topping); });
+    $$('input[name="b-xd"]').forEach(function (r) { r.checked = st.xd.indexOf(r.value) >= 0; });
+    $$('input[name="b-xt"]').forEach(function (r) { r.checked = st.xt.indexOf(r.value) >= 0; });
+    svg.style.setProperty("--b-sauce", find("drizzle", st.drizzle).color);
+    svg.setAttribute("data-top", find("topping", st.topping).key);
+    $("#bSummary").textContent = summaryText();
+    $("#bTotal").textContent = peso(total());
+    // the "Your box" card in the order form
+    var ul = $("#boxSumList"); ul.innerHTML = "";
+    var d = find("drizzle", st.drizzle), ex = extrasList();
+    [["Turon", piecesSummary()], ["Ice cream", "Vanilla (included)"], ["Drizzle", d.name + (d.up ? " (+" + peso(d.up) + ")" : "")],
+     ["Topping", find("topping", st.topping).name], ["Extras", ex.length ? ex.join(", ") : "None"]].forEach(function (r) {
+      ul.appendChild(h("li", null, [h("span", { text: r[0] + ": " }), h("span", { text: r[1] })]));
+    });
+    $("#totalVal").textContent = peso(total());
   }
 
   /* ---------- scrolling that works inside a sandboxed / srcdoc iframe ---------- */
@@ -1204,22 +1332,29 @@ const FAQ = [
 
   /* ---------- order / inquiry form ---------- */
   var form = $("#orderForm"), mode = "order";
+  function radioVal(name) { var r = $('input[name="' + name + '"]:checked'); return r ? r.value : ""; }
   function setMode(m) {
     mode = m;
     $$('input[name="mode"]').forEach(function (r) { r.checked = (r.value === m); });
     $$("[data-order-only]").forEach(function (f) { f.hidden = (m !== "order"); });
-    $("#notesLab").textContent = m === "order" ? "Notes (optional)" : "Your question";
+    $$("[data-inquiry-only]").forEach(function (f) { f.hidden = (m !== "inquiry"); });
     $("#totalBox").hidden = (m !== "order");
-    $("#submitBtn").textContent = "Create my message";
-    clearErrors(); updateTotal();
+    $("#submitBtn").textContent = m === "order" ? "Create my order" : "Create my message";
+    clearErrors(); updateOrderUI();
   }
-  function qtyValue() { var n = parseInt($("#fQty").value, 10); return isFinite(n) ? n : 0; }
-  function updateTotal() {
-    var n = qtyValue(), ok = n >= 1 && n <= MAX_ORDERS;
-    $("#totalVal").textContent = ok ? peso(n * PRICE) : peso(0);
+  function updateOrderUI() {
+    var mod = radioVal("modality"), pay = radioVal("pay");
+    $("#locField").hidden = !(mode === "order" && mod === "Delivery");
+    $("#modHint").textContent = mod === "Delivery" ? "We deliver within campus. Tell us the room or building area below."
+      : mod === "Pick-Up" ? "Pick up at the " + PICKUP_SPOT + " during authorized break windows." : "";
+    var pb = $("#payBox");
+    pb.hidden = !(mode === "order" && pay);
+    $("#payHint").textContent = pay === "GCash"
+      ? "GCash: " + gcashFmt() + " (" + GCASH_NAME + "). Pay first, then send a screenshot of your receipt to us on Instagram or Facebook/Messenger so we can confirm your order."
+      : pay === "Cash" ? "Pay in cash when you pick up or when we deliver." : "";
   }
   function clearErrors() {
-    ["Name", "Group", "Qty", "Pay", "Notes"].forEach(function (k) { var e = $("#e" + k); if (e) e.textContent = ""; });
+    ["Name", "Group", "Contact", "Modality", "Loc", "Pay", "Notes"].forEach(function (k) { var e = $("#e" + k); if (e) e.textContent = ""; });
     $$(".input").forEach(function (i) { i.removeAttribute("aria-invalid"); });
     $("#formMsg").textContent = "";
   }
@@ -1227,12 +1362,13 @@ const FAQ = [
   function validate() {
     clearErrors();
     var bad = [];
-    if (!$("#fName").value.trim()) fail("#fName", "#eName", "Add your name so we know who to look for.", bad);
+    if (!$("#fName").value.trim()) fail("#fName", "#eName", "Add your name or nickname so we know who to look for.", bad);
     if (!$("#fGroup").value.trim()) fail("#fGroup", "#eGroup", "Add your grade and section, or type Teacher, Staff, or Other.", bad);
     if (mode === "order") {
-      var n = qtyValue();
-      if (!(n >= 1 && n <= MAX_ORDERS)) fail("#fQty", "#eQty", "Enter a number of orders from 1 to " + MAX_ORDERS + ".", bad);
-      if (!$('input[name="pay"]:checked')) { $("#ePay").textContent = "Choose Cash or GCash."; bad.push($('input[name="pay"]')); }
+      if (!radioVal("contact")) { $("#eContact").textContent = "Choose how we can contact you."; bad.push($('input[name="contact"]')); }
+      if (!radioVal("modality")) { $("#eModality").textContent = "Choose Pick-Up or Delivery."; bad.push($('input[name="modality"]')); }
+      else if (radioVal("modality") === "Delivery" && !$("#fLoc").value.trim()) fail("#fLoc", "#eLoc", "Tell us the room or building area for delivery.", bad);
+      if (!radioVal("pay")) { $("#ePay").textContent = "Choose Cash or GCash."; bad.push($('input[name="pay"]')); }
     } else if (!$("#fNotes").value.trim()) fail("#fNotes", "#eNotes", "Type your question so we can answer it.", bad);
     if (bad.length) {
       $("#formMsg").textContent = "Please fix the " + (bad.length === 1 ? "field" : bad.length + " fields") + " marked above.";
@@ -1242,66 +1378,82 @@ const FAQ = [
     return true;
   }
   function buildMessage() {
-    var name = $("#fName").value.trim(), grp = $("#fGroup").value.trim(), notes = $("#fNotes").value.trim(), L = [];
+    var name = $("#fName").value.trim(), grp = $("#fGroup").value.trim(), L = [];
     if (mode === "order") {
-      var n = qtyValue(), brk = $("#fBreak").value.trim();
+      var d = find("drizzle", st.drizzle), ex = extrasList(), social = $("#fSocial").value.trim(), mod = radioVal("modality");
       L.push("Hi Turon-Da-Go! I would like to pre-order Saba-Zero.", "");
-      L.push("Name: " + name, "Grade and section: " + grp, "");
-      L.push("Turon: " + find("turon", sel.turon).name);
-      L.push("Ice cream: " + find("ice", sel.ice).name);
-      L.push("Sauce drizzle: " + find("sauce", sel.sauce).name);
-      L.push("Orders: " + n + " (" + (n * PIECES_PER_ORDER) + " pieces)");
-      L.push("Payment: " + $('input[name="pay"]:checked').value);
-      if (brk) L.push("Preferred break time: " + brk);
-      if (notes) L.push("Notes: " + notes);
-      L.push("", "Estimated total: " + peso(n * PRICE));
+      L.push("Name: " + name, "Grade and section: " + grp);
+      L.push("Contact me on: " + radioVal("contact") + (social ? " (" + social + ")" : ""), "");
+      L.push("Turon (" + PIECES_PER_ORDER + " pieces): " + st.pieces.map(function (id) { return find("turon", id).name; }).join(", "));
+      L.push("Ice cream: Vanilla");
+      L.push("Drizzle: " + d.name + (d.up ? " (+" + peso(d.up) + ")" : ""));
+      L.push("Topping: " + find("topping", st.topping).name);
+      L.push("Extras: " + (ex.length ? ex.join(", ") : "none"), "");
+      L.push(mod === "Delivery" ? "Delivery to: " + $("#fLoc").value.trim() : "Pick-up at: " + PICKUP_SPOT);
+      L.push("Payment: " + radioVal("pay"));
+      L.push("", "Estimated total: " + peso(total()));
     } else {
-      L.push("Hi Turon-Da-Go! I have a question.", "", "Name: " + name, "Grade and section: " + grp, "", notes);
+      L.push("Hi Turon-Da-Go! I have a question.", "", "Name: " + name, "Grade and section: " + grp, "", $("#fNotes").value.trim());
     }
     return L.join("\n");
   }
-  // Sandboxed embeds usually lack "allow-forms", which silently blocks native form submission.
-  // So the button is type="button" and we handle click + Enter ourselves. Nothing is ever posted anywhere.
-  var sending = false, lastSent = "";
   function orderData() {
-    var d = { type: mode === "order" ? "Order" : "Inquiry", name: $("#fName").value.trim(), group: $("#fGroup").value.trim(), notes: $("#fNotes").value.trim() };
-    if (mode === "order") {
-      var n = qtyValue();
-      d.turon = find("turon", sel.turon).name; d.ice = find("ice", sel.ice).name; d.sauce = find("sauce", sel.sauce).name;
-      d.orders = String(n); d.payment = $('input[name="pay"]:checked').value; d.breakTime = $("#fBreak").value.trim(); d.total = peso(n * PRICE);
-    }
-    return d;
+    return {
+      name: $("#fName").value.trim(), group: $("#fGroup").value.trim(), contact: radioVal("contact"), social: $("#fSocial").value.trim(),
+      pieces: st.pieces.map(function (id) { return find("turon", id).name; }),
+      drizzle: find("drizzle", st.drizzle).form, topping: find("topping", st.topping).name,
+      xd: st.xd.map(function (id) { return find("drizzle", id).name; }),
+      xt: st.xt.map(function (id) { return find("topping", id).name; }),
+      modality: radioVal("modality"), location: $("#fLoc").value.trim(), payment: radioVal("pay")
+    };
   }
   // Posts to the Google Form with no-cors fetch. (A normal form post is blocked in sandboxed embeds, and the reply is opaque,
   // so "sent" means the browser delivered it; check your Sheet to confirm rows arrive.)
   function sendToForm(d) {
-    var body = new URLSearchParams();
-    Object.keys(ORDER_SUBMIT.fields).forEach(function (k) { var id = ORDER_SUBMIT.fields[k]; if (id && d[k] !== undefined) body.append(id, d[k]); });
+    var f = ORDER_SUBMIT.fields, body = new URLSearchParams();
+    function add(key, v) { if (f[key] && v !== undefined && v !== "") body.append(f[key], v); }
+    add("name", d.name); add("group", d.group); add("contact", d.contact); add("social", d.social);
+    d.pieces.forEach(function (v, i) { add("piece" + (i + 1), v); });
+    add("drizzle", d.drizzle); add("topping", d.topping);
+    d.xd.forEach(function (v) { add("extraDrizzles", v); });
+    d.xt.forEach(function (v) { add("extraToppings", v); });
+    add("modality", d.modality);
+    if (d.modality === "Delivery") add("location", d.location);
+    add("payment", d.payment);
+    var pg = ORDER_SUBMIT.pages, pages = pg.base.slice();
+    if (d.modality === "Delivery") pages.push(pg.delivery);
+    pages.push(pg.payment);
+    if (d.payment === "GCash") pages.push(pg.gcash);
+    body.append("pageHistory", pages.join(","));
     var timeout = new Promise(function (_, rej) { setTimeout(function () { rej(new Error("timeout")); }, 20000); });
     return Promise.race([fetch(ORDER_SUBMIT.formResponseUrl, { method: "POST", mode: "no-cors", body: body }), timeout]);
   }
+  var sending = false, lastSent = "";
   function setSendState(state) {
-    var st = $("#sendStatus"), title = $("#resultTitle"), help = $("#resultHelp"), btn = $("#submitBtn");
-    st.className = "send-status"; st.hidden = false;
+    var st2 = $("#sendStatus"), title = $("#resultTitle"), help = $("#resultHelp"), btn = $("#submitBtn");
+    st2.className = "send-status"; st2.hidden = false;
     btn.disabled = (state === "sending");
-    if (state === "sending") { st.textContent = "Sending your order to Turon-Da-Go..."; title.textContent = "Sending your order"; }
-    else if (state === "sent") { st.classList.add("ok"); st.textContent = "Order sent! We got your details and will confirm with you on Instagram or TikTok."; title.textContent = "Order sent"; help.textContent = "Backup: you can also send this message to us on Instagram or TikTok."; }
-    else if (state === "dup") { st.classList.add("ok"); st.textContent = "This order was already sent. Change something to send a new one."; title.textContent = "Order sent"; }
-    else { st.classList.add("bad"); st.textContent = "We could not confirm that your order was sent. Please copy the message below and send it to us on Instagram or TikTok so we do not miss it."; title.textContent = "Your message is ready"; help.textContent = "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus."; }
+    if (state === "sending") { st2.textContent = "Sending your order to Turon-Da-Go..."; title.textContent = "Sending your order"; }
+    else if (state === "sent") { st2.classList.add("ok"); st2.textContent = "Order sent! We got your details and will confirm with you on " + radioVal("contact") + "."; title.textContent = "Order sent"; help.textContent = "Backup: you can also send this message to us on Instagram or TikTok."; }
+    else if (state === "dup") { st2.classList.add("ok"); st2.textContent = "This order was already sent. Change something to send a new one."; title.textContent = "Order sent"; }
+    else { st2.classList.add("bad"); st2.textContent = "We could not confirm that your order was sent. Please copy the message below and send it to us on Instagram or TikTok so we do not miss it."; title.textContent = "Your message is ready"; help.textContent = "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash."; }
   }
   function submitForm() {
     if (sending) return;
     if (!validate()) { $("#result").hidden = true; return; }
     var msg = buildMessage();
     $("#msgOut").value = msg;
-    var res = $("#result"); res.hidden = false;
-    $("#gcashNote").hidden = !(mode === "order" && $('input[name="pay"]:checked').value === "GCash");
+    $("#result").hidden = false;
+    var gn = $("#gcashNote");
+    if (mode === "order" && radioVal("pay") === "GCash") { gn.hidden = false; gn.textContent = "Paying with GCash? Our GCash number is " + gcashFmt() + " (" + GCASH_NAME + "). Send us a screenshot of your receipt."; }
+    else gn.hidden = true;
     $("#copyStatus").textContent = "If the copy button does nothing, select the text in the box and copy it.";
     $("#resultTitle").textContent = "Your message is ready";
-    $("#resultHelp").textContent = "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash on campus.";
+    $("#resultHelp").textContent = "Send this to us on Instagram to pre-order. We will confirm, and you pay with Cash or GCash.";
     $("#sendStatus").hidden = true;
     goTo("result", false);
     $("#msgOut").focus();
+    if (mode !== "order") return;                              // inquiries are message-only (the form has no question field)
     if (!ORDER_SUBMIT.formResponseUrl) return;               // live orders switched off: message only
     if ($("#fWebsite").value) return;                         // spam trap filled in: do not send
     if (msg === lastSent) { setSendState("dup"); return; }   // no duplicate rows
@@ -1315,13 +1467,14 @@ const FAQ = [
   form.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && e.target && e.target.tagName === "INPUT" && e.target.type !== "radio") { e.preventDefault(); submitForm(); }
   });
-  form.addEventListener("input", function () { updateTotal(); });
+  form.addEventListener("change", updateOrderUI);
+  form.addEventListener("input", function () { clearErrors(); });
   $$('input[name="mode"]').forEach(function (r) { r.addEventListener("change", function () { setMode(r.value); $("#result").hidden = true; }); });
   $("#copyBtn").addEventListener("click", function () {
-    var ta = $("#msgOut"), st = $("#copyStatus"), ok = false;
+    var ta = $("#msgOut"), stt = $("#copyStatus"), ok = false;
     ta.focus(); ta.select();
     function done() {
-      st.textContent = ok ? "Copied. Now paste it into a message to us on Instagram or TikTok." : "Could not copy automatically. The text is selected: press Ctrl+C (or tap and hold, then Copy).";
+      stt.textContent = ok ? "Copied. Now paste it into a message to us on Instagram or TikTok." : "Could not copy automatically. The text is selected: press Ctrl+C (or tap and hold, then Copy).";
     }
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
