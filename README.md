@@ -26,7 +26,7 @@ Double-click `embed-test.html`. It loads the site inside a locked-down frame (li
 
 For the closest match to Google Sites, click **Pasted code (srcdoc)** and choose `index.html`.
 
-Check: menu links scroll, the Order form builds a message, Instagram and TikTok open in a new tab.
+Check: menu links scroll, the Order form and the Inquiry form each build a message, Instagram and TikTok open in a new tab.
 
 ## 3. Change things (open `index.html`, search for the word in quotes)
 
@@ -64,6 +64,8 @@ Rules for the Google Form (otherwise orders are silently lost):
 2. **Do not turn on "Limit to 1 response", "Collect email addresses", or "Restrict to users in your organization".** Each one needs a sign-in or extra data the site does not send.
 3. **Option text must match exactly.** The drizzle, topping and flavor names in the form must match the `FLAVORS` list in `index.html` (for example `Biscoff ( +₱10.00 )`). If you rename an option in the form, rename it in `FLAVORS` too.
 4. **Pages.** The form has 10 pages. The site tells Google which pages were visited (`ORDER_SUBMIT.pages`). If you add, remove or reorder pages or questions, update `ORDER_SUBMIT`.
+
+Inquiries (the separate "Send an Inquiry" box) are sent to the ORIGINAL Google Form, set in `INQUIRY_SUBMIT`. Set its `formResponseUrl` to `""` to make inquiries message-only.
 
 To switch to a different form later: open its public link, read each question's `entry.NNN` id (Google Forms > pre-filled link shows them), and fill in `ORDER_SUBMIT` in `index.html`. Leave `ORDER_FORM_URL` empty so visitors use this site's form.
 
